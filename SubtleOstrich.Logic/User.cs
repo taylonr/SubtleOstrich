@@ -10,16 +10,23 @@ namespace SubtleOstrich.Logic
     {
         private readonly IUserRepository _repo;
 
-        public User()
-            :this(new UserRepository())
+        public string Id { get; set; }
+
+
+        public string Name { get; set; }
+
+        public User(string email, string name, string source)
+            :this(email, name, source, new UserRepository())
         {
             
         }
 
-        public User(IUserRepository repo)
+        public User(string uid, string name, string source, IUserRepository repo)
         {
             _repo = repo;
             Activities = new List<Activity>();
+            Id = string.Format("{0}:{1}", source, uid);
+            Name = name;
         }
 
         public void AddActivity(Activity activity)
@@ -55,7 +62,5 @@ namespace SubtleOstrich.Logic
         {
             _repo.Save(this);
         }
-
-        public string Id { get; set; }
     }
 }

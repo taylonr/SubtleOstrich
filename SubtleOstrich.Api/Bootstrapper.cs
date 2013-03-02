@@ -1,5 +1,6 @@
 using System.Configuration;
 using Nancy;
+using Nancy.Session;
 using Nancy.TinyIoc;
 using WorldDomination.Web.Authentication;
 using WorldDomination.Web.Authentication.Facebook;
@@ -26,6 +27,12 @@ namespace SubtleOstrich.Api
             _facebookAppSecret = appSettings["FacebookSecret"];
             _googleConsumerKey = appSettings["GoogleKey"];
             _googleConsumerSecret = appSettings["GoogleSecret"];
+        }
+
+        protected override void ApplicationStartup(TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)
+        {
+            CookieBasedSessions.Enable(pipelines);
+            base.ApplicationStartup(container, pipelines);
         }
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)

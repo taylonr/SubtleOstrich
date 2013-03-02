@@ -16,7 +16,7 @@ namespace SubtleOstrich.Logic.UnitTests
         public void SeUp()
         {
             _repo = A.Fake<IUserRepository>();
-            _user = new User(_repo);
+            _user = new User("A", "test user", "facebook", _repo);
         }
 
         [Test]
@@ -81,6 +81,18 @@ namespace SubtleOstrich.Logic.UnitTests
             _user.AddRecord("technique", new Record(new DateTime(2013, 3, 1)));
             _user.Save();
             A.CallTo(() => _repo.Save(A<User>.That.Matches(x => x.Activities.Count == 1))).MustHaveHappened();
+        }
+
+        [Test]
+        public void Constructor_Should_Set_Id_To_Uid_And_Provider()
+        {
+            _user.Id.ShouldEqual("facebook:A");
+        }
+
+        [Test]
+        public void Constructor_Should_Set_Name()
+        {
+            _user.Name.ShouldEqual("test user");
         }
     }
 }

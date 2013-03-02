@@ -77,6 +77,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Home.html" />
     <Content Include="login.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
