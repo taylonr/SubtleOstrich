@@ -4,9 +4,9 @@ namespace SubtleOstrich.Logic
 {
     public class Record
     {
-        public DateTime Date { get; private set; }
+        public DateTime Date { get; set; }
 
-        public string Note { get; private set; }
+        public string Note { get; set; }
 
         public Record(DateTime date, string note = "")
         {
