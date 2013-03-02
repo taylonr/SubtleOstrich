@@ -12,6 +12,7 @@ namespace SubtleOstrich.Logic
 
         public string Id { get; set; }
 
+        public Guid Identifier { get; set; }
 
         public string Name { get; set; }
 
@@ -60,6 +61,9 @@ namespace SubtleOstrich.Logic
 
         public void Save()
         {
+            if(Identifier == Guid.Empty)
+                Identifier = Guid.NewGuid();
+
             _repo.Save(this);
         }
     }

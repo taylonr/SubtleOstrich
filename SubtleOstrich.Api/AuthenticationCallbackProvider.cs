@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
 using Nancy;
+using Nancy.Authentication.Forms;
 using Nancy.Authentication.WorldDomination;
+using Nancy.Security;
 using SubtleOstrich.Logic;
 
 namespace SubtleOstrich.Api
@@ -27,10 +31,33 @@ namespace SubtleOstrich.Api
                 u = new User(model.AuthenticatedClient.UserInformation.Id, model.AuthenticatedClient.UserInformation.Name, model.AuthenticatedClient.ProviderName);
                 u.Save();
             }
-
-            //nancyModule.Request.Session["user"] = u;
             
             return nancyModule.Negotiate.WithView("Home").WithModel(u);
         }
+    }
+
+    public class UserMapper : IUserMapper
+    {
+        private readonly IUserRepository _repository;
+
+        public UserMapper()
+        {
+            _repository = new UserRepository();
+        }
+
+        public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
+        {
+            var u = _repository.GetByGuid(identifier);
+            if (u == null)
+                return null;
+
+            return new UserIdentity {UserName = u.Name};
+        }
+    }
+
+    public class UserIdentity : IUserIdentity
+    {
+        public string UserName { get; set; }
+        public IEnumerable<string> Claims { get; set; }
     }
 }

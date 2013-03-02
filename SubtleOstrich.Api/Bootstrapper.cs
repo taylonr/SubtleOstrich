@@ -1,5 +1,6 @@
 using System.Configuration;
 using Nancy;
+using Nancy.Authentication.Forms;
 using Nancy.Session;
 using Nancy.TinyIoc;
 using WorldDomination.Web.Authentication;
@@ -32,6 +33,14 @@ namespace SubtleOstrich.Api
         protected override void ApplicationStartup(TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)
         {
             CookieBasedSessions.Enable(pipelines);
+
+            var formsAuthConfiguration = new FormsAuthenticationConfiguration()
+                {
+                    RedirectUrl = "~/login",
+                    UserMapper = container.Resolve<IUserMapper>(),
+                };
+
+            FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
             base.ApplicationStartup(container, pipelines);
         }
 

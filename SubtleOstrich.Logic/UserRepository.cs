@@ -1,3 +1,4 @@
+using System;
 using MongoRepository;
 
 namespace SubtleOstrich.Logic
@@ -19,6 +20,11 @@ namespace SubtleOstrich.Logic
         public User GetBySourceAndId(string providerName, string id)
         {
             return _mongo.GetSingle(u => u.Id == string.Format("{0}:{1}", providerName, id));
+        }
+
+        public User GetByGuid(Guid identifier)
+        {
+            return _mongo.GetSingle(u => u.Identifier == identifier);
         }
     }
 }
