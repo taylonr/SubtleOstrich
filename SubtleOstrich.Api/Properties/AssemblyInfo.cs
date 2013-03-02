@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SubtleOstrich")]
+[assembly: AssemblyTitle("SubtleOstrich.Api")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SubtleOstrich")]
+[assembly: AssemblyProduct("SubtleOstrich.Api")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("421f225a-2279-43f3-a062-7bbfba48dce3")]
+[assembly: Guid("51b92251-6c81-448e-bd97-e664b7c2548a")]
 
 // Version information for an assembly consists of the following four values:
 //

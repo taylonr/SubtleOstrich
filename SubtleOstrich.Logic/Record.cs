@@ -8,6 +8,11 @@ namespace SubtleOstrich.Logic
 
         public string Note { get; set; }
 
+        public Record()
+        {
+            
+        }
+
         public Record(DateTime date, string note = "")
         {
             Date = date;
