@@ -14,10 +14,15 @@ namespace SubtleOstrich.Logic
 
         public string Name { get; set; }
 
+        public User(string uid, string source)
+            :this(uid, null, source)
+        {
+        }
+
         public User(string id, string name, string source)
             :this(id, name, source, new UserRepository())
         {
-            
+            Activities = _repo.GetActivities(Id);
         }
 
         public User(string uid, string name, string source, IUserRepository repo)
@@ -50,6 +55,8 @@ namespace SubtleOstrich.Logic
             }
 
             activity.AddRecord(record);
+
+            Save();
         }
 
         public int GetYearTotal(int year)

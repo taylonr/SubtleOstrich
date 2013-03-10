@@ -26,8 +26,13 @@ namespace SubtleOstrich.Logic
 
         public IEnumerable<Activity> GetActivities(string id, DateTime date)
         {
-            var activities = _mongo.GetSingle(u => u.Id == id).Activities;
+            var activities = GetActivities(id);
             return activities.Where(act => act.Records.Any(rec => rec.Date.ToShortDateString() == date.ToShortDateString()));
+        }
+
+        public IList<Activity> GetActivities(string id)
+        {
+            return _mongo.GetSingle(u => u.Id == id).Activities;
         }
 
         public User GetById(string id)

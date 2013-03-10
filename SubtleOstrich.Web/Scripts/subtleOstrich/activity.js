@@ -12,7 +12,7 @@
 function ActivityControl($scope, Activity) {
     $scope.activity = Activity.query();
     $scope.save = function() {
-        $scope.activity.unshift({ Name: $scope.name });
+        $scope.activity.push({ Name: $scope.name });
         var act = new Activity({ Name: $scope.name });
         act.$save();
         $scope.name = '';

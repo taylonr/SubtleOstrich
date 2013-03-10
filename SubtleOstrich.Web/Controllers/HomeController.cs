@@ -47,7 +47,7 @@ namespace SubtleOstrich.Web.Controllers
 
         public JsonResult ActivityList()
         {
-            var u = new User("240747413", "Nate Taylor", "twitter");
+            var u = new User("240747413", "twitter");
             var activities = u.GetActivities(DateTime.Today);
             return Json(activities, JsonRequestBehavior.AllowGet);
         }
@@ -55,7 +55,11 @@ namespace SubtleOstrich.Web.Controllers
         [HttpPost]
         public void ActivityList(Occurrence occ)
         {
-            Console.WriteLine("Posted");
+            if(occ.Date == DateTime.MinValue)
+                occ.Date = DateTime.Today;
+
+            var u = new User("240747413", "twitter");
+            u.AddRecord(occ.Name, new Record(occ.Date, occ.Note));
         }
     }
 }
