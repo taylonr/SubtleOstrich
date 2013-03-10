@@ -3,30 +3,16 @@
 @{
     ViewBag.Title = "Activity";
 }
-
+<script src="@Url.Content("~/Scripts/subtleOstrich/activity.js")"></script>
 <div class="row">
-    <div class="well">
-        <table class="table table-bordered">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                        @Html.DisplayFor(modelItem => item.Note)
-                    </td>
-                </tr>
-            }
-
-        </table>
+    <div class="well" ng-controller="ActivityControl">
+        <ul>
+            <li ng-repeat="act in activity">
+                <span>{{act.name}} - {{act.note}}</span>
+            </li>
+        </ul>
+        
     </div>
 </div>
-<h2>Activity</h2>
 
 
