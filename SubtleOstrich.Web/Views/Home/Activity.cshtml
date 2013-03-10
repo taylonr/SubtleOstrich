@@ -5,9 +5,10 @@
 <div class="row">
     <div class="span8 offset4" ng-controller="ActivityControl">
         <form ng-submit="save()">
-            <div>
-                Today I did
-                <input type="text" ng-model="name" required /><input class="btn-primary" type="submit" value="add">
+            <div>Today I did
+                <input type="hidden" ng-model="date"/>
+                <input type="text" ng-model="name" required />
+                <input class="btn-primary" type="submit" value="add">
             </div>
         </form>
 
