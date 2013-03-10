@@ -62,9 +62,22 @@ namespace SubtleOstrich.Logic
             _repo.Save(this);
         }
 
-        public IEnumerable<Activity> GetActivities(DateTime date)
+        public IEnumerable<Occurrence> GetActivities(DateTime date)
         {
-            return _repo.GetActivities(Id, date);
+            var activities = _repo.GetActivities(Id, date);
+
+            var occurrences = new List<Occurrence>();
+            foreach(var a in activities)
+                occurrences.AddRange(a.Records.Where(x => x.Date.ToShortDateString() == date.ToShortDateString()).Select(r => new Occurrence(r.Id, a.Name, r.Date, r.Note)));
+
+            return occurrences;
+        }
+
+        public void DeleteRecord(string id)
+        {
+            var activity = Activities.FirstOrDefault(x => x.Records.Any(y => y.Id == id));
+            activity.Records.Remove(activity.Records.FirstOrDefault(x => x.Id == id));
+            Save();
         }
     }
 }

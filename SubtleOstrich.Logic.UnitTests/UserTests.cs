@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FakeItEasy;
 using NUnit.Framework;
 using Should;
@@ -39,6 +40,14 @@ namespace SubtleOstrich.Logic.UnitTests
         {
             _user.AddRecord("technique", new Record(new DateTime(2013, 3, 1)));
             _user.Activities.Count.ShouldEqual(1);
+        }
+
+        [Test]
+        public void DeleteRecord_Should_Remove_Record_From_Activity()
+        {
+            _user.AddRecord("technique", new Record{Date = new DateTime(2013, 3, 1), Id = "a"});
+            _user.DeleteRecord("a");
+            _user.Activities.FirstOrDefault(x => x.Name == "technique").Records.Any().ShouldBeFalse();
         }
 
         [Test]

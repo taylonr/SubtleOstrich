@@ -1,8 +1,9 @@
 ﻿using System;
+using MongoRepository;
 
 namespace SubtleOstrich.Logic
 {
-    public class Record
+    public class Record : Entity
     {
         public DateTime Date { get; set; }
 
