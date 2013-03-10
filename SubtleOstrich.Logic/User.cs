@@ -12,12 +12,10 @@ namespace SubtleOstrich.Logic
 
         public string Id { get; set; }
 
-        public Guid Identifier { get; set; }
-
         public string Name { get; set; }
 
-        public User(string email, string name, string source)
-            :this(email, name, source, new UserRepository())
+        public User(string id, string name, string source)
+            :this(id, name, source, new UserRepository())
         {
             
         }
@@ -61,10 +59,12 @@ namespace SubtleOstrich.Logic
 
         public void Save()
         {
-            if(Identifier == Guid.Empty)
-                Identifier = Guid.NewGuid();
-
             _repo.Save(this);
+        }
+
+        public IEnumerable<Activity> GetActivities(DateTime date)
+        {
+            return _repo.GetActivities(Id, date);
         }
     }
 }

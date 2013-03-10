@@ -13,7 +13,7 @@ namespace SubtleOstrich.Logic.UnitTests
         private IUserRepository _repo;
 
         [SetUp]
-        public void SeUp()
+        public void SetUp()
         {
             _repo = A.Fake<IUserRepository>();
             _user = new User("A", "test user", "facebook", _repo);
@@ -93,6 +93,13 @@ namespace SubtleOstrich.Logic.UnitTests
         public void Constructor_Should_Set_Name()
         {
             _user.Name.ShouldEqual("test user");
+        }
+
+        [Test]
+        public void GetActivities_Should_Call_Database_With_Date()
+        {
+            _user.GetActivities(DateTime.Today);
+            A.CallTo(() => _repo.GetActivities(A<string>._, DateTime.Today)).MustHaveHappened();
         }
     }
 }

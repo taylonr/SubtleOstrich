@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MongoRepository;
 
 namespace SubtleOstrich.Logic
@@ -7,6 +8,6 @@ namespace SubtleOstrich.Logic
     {
         void Save(User entity);
         User GetBySourceAndId(string providerName, string id);
-        User GetByGuid(Guid identifier);
+        IEnumerable<Activity> GetActivities(string id, DateTime date);
     }
 }

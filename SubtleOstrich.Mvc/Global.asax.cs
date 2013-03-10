@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
-using SubtleOstrich.Logic;
+using SubtleOstrich.Mvc.Controllers;
 using WorldDomination.Web.Authentication;
 using WorldDomination.Web.Authentication.Facebook;
 using WorldDomination.Web.Authentication.Google;
 using WorldDomination.Web.Authentication.Mvc;
 using WorldDomination.Web.Authentication.Twitter;
+
+namespace SubtleOstrich.Mvc.Controllers
+{
+}
 
 namespace SubtleOstrich.Mvc
 {
@@ -68,63 +71,7 @@ namespace SubtleOstrich.Mvc
             authenticationService.AddProvider(googleProvider);
 
             builder.RegisterInstance(authenticationService).As<IAuthenticationService>();
-            builder.RegisterType<AuthenticationCallbackProvider>().As<IAuthenticationCallbackProvider>();
+            builder.RegisterType<AuthenticationController>().As<IAuthenticationCallbackProvider>();
         }  
     }
-
-    public class AuthenticationCallbackProvider : IAuthenticationCallbackProvider
-    {
-        private readonly IUserRepository _repository;
-
-        public AuthenticationCallbackProvider()
-            : this(new UserRepository())
-        {
-        }
-
-        public AuthenticationCallbackProvider(IUserRepository repo)
-        {
-            _repository = repo;
-        }
-
-        public ActionResult Process(HttpContextBase context, AuthenticateCallbackData model)
-        {
-            var u = _repository.GetBySourceAndId(model.AuthenticatedClient.ProviderName, model.AuthenticatedClient.UserInformation.Id);
-
-            if (u == null)
-            {
-                u = new User(model.AuthenticatedClient.UserInformation.Id, model.AuthenticatedClient.UserInformation.Name, model.AuthenticatedClient.ProviderName);
-                u.Save();
-            }
-
-            return new ViewResult();
-        }
-    }
-
-    //public class AuthenticationCallbackProvider : IAuthenticationCallbackProvider
-    //{
-    //    private IUserRepository _repository;
-
-    //    public AuthenticationCallbackProvider()
-    //        :this(new UserRepository())
-    //    {
-    //    }
-
-    //    public AuthenticationCallbackProvider(IUserRepository repo)
-    //    {
-    //        _repository = repo;
-    //    }
-
-    //    public dynamic Process(NancyModule nancyModule, AuthenticateCallbackData model)
-    //    {
-    //        var u = _repository.GetBySourceAndId(model.AuthenticatedClient.ProviderName, model.AuthenticatedClient.UserInformation.Id);
-
-    //        if(u == null)
-    //        {
-    //            u = new User(model.AuthenticatedClient.UserInformation.Id, model.AuthenticatedClient.UserInformation.Name, model.AuthenticatedClient.ProviderName);
-    //            u.Save();
-    //        }
-            
-    //        return nancyModule.Negotiate.WithView("Home").WithModel(u);
-    //    }
-    //}
 }

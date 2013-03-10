@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using MongoRepository;
 
 namespace SubtleOstrich.Logic
@@ -22,9 +24,15 @@ namespace SubtleOstrich.Logic
             return _mongo.GetSingle(u => u.Id == string.Format("{0}:{1}", providerName, id));
         }
 
-        public User GetByGuid(Guid identifier)
+        public IEnumerable<Activity> GetActivities(string id, DateTime date)
         {
-            return _mongo.GetSingle(u => u.Identifier == identifier);
+            var activities = _mongo.GetSingle(u => u.Id == id).Activities;
+            return activities.Where(act => act.Records.Any(rec => rec.Date.ToShortDateString() == date.ToShortDateString()));
+        }
+
+        public User GetById(string id)
+        {
+            return _mongo.GetById(id); 
         }
     }
 }
