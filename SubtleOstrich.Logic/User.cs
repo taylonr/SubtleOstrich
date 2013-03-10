@@ -75,8 +75,8 @@ namespace SubtleOstrich.Logic
 
         public void DeleteRecord(string id)
         {
-            var activity = Activities.FirstOrDefault(x => x.Records.Any(y => y.Id == id));
-            activity.Records.Remove(activity.Records.FirstOrDefault(x => x.Id == id));
+            var activity = Activities.FirstOrDefault(x => x.Records.Any(record => record.Id == id));
+            activity.Records.Remove(activity.Records.FirstOrDefault(record => record.Id == id));
             Save();
         }
     }
