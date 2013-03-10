@@ -30,11 +30,32 @@ namespace SubtleOstrich.Web.Controllers
             return View();
         }
 
+        public ActionResult List()
+        {
+            return View();
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         public ActionResult Activity()
+        {
+            return View("Activity");
+        }
+
+        public JsonResult ActivityList()
         {
             var u = new User("240747413", "Nate Taylor", "twitter");
             var activities = u.GetActivities(DateTime.Today);
-            return View("Activity", activities);
+            return Json(activities, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public void ActivityList(Occurrence occ)
+        {
+            Console.WriteLine("Posted");
         }
     }
 }

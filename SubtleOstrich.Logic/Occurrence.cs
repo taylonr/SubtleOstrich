@@ -9,6 +9,11 @@ namespace SubtleOstrich.Logic
         public DateTime Date { get; set; }
         public string Note { get; set; }
 
+        public Occurrence()
+        {
+            
+        }
+
         public Occurrence(string id, string name, DateTime date, string note)
         {
             Id = id;
