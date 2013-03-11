@@ -23,6 +23,7 @@ namespace SubtleOstrich.Logic
             :this(id, name, source, new UserRepository())
         {
             Activities = _repo.GetActivities(Id);
+            Name = _repo.GetName(Id);
         }
 
         public User(string uid, string name, string source, IUserRepository repo)
@@ -75,7 +76,7 @@ namespace SubtleOstrich.Logic
 
             var occurrences = new List<Occurrence>();
             foreach(var a in activities)
-                occurrences.AddRange(a.Records.Where(x => x.Date.ToShortDateString() == date.ToShortDateString()).Select(r => new Occurrence(r.Id, a.Name, r.Date, r.Note)));
+                occurrences.AddRange(a.Records.Where(x => x.Date.ToLocalTime().ToShortDateString() == date.ToShortDateString()).Select(r => new Occurrence(r.Id, a.Name, r.Date, r.Note)));
 
             return occurrences;
         }

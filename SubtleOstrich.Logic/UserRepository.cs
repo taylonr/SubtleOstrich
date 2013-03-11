@@ -16,7 +16,7 @@ namespace SubtleOstrich.Logic
 
         public void Save(User entity)
         {
-                _mongo.Update(entity);
+            _mongo.Update(entity);
         }
 
         public User GetBySourceAndId(string providerName, string id)
@@ -27,12 +27,20 @@ namespace SubtleOstrich.Logic
         public IEnumerable<Activity> GetActivities(string id, DateTime date)
         {
             var activities = GetActivities(id);
-            return activities.Where(act => act.Records.Any(rec => rec.Date.ToShortDateString() == date.ToShortDateString()));
+            if (activities == null)
+                return new List<Activity>();
+
+            return activities.Where(act => act.Records != null && act.Records.Any(rec => rec.Date.ToLocalTime().ToShortDateString() == date.ToShortDateString()));
         }
 
         public IList<Activity> GetActivities(string id)
         {
-            return _mongo.GetSingle(u => u.Id == id).Activities;
+            return _mongo.GetSingle(u => u.Id == id).Activities ?? new List<Activity>();
+        }
+
+        public string GetName(string id)
+        {
+            return GetById(id).Name;
         }
 
         public User GetById(string id)

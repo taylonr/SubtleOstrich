@@ -6,20 +6,25 @@ using MongoRepository;
 
 namespace SubtleOstrich.Logic
 {
-    public class Activity : Entity
+    public class Activity : IEntity
     {
+        public string Id { get; set; }
+
         public string Name { get; set; }
 
         public IList<Record> Records { get; set; }
 
         public Activity()
         {
+            Records = new List<Record>();
         }
 
         public Activity(string name)
+            : this()
         {
+            Id = name;
             Name = name;
-            Records = new List<Record>();
+            
         }
 
         public void AddRecord(Record record)
