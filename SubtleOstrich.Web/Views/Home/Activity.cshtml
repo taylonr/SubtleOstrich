@@ -14,8 +14,11 @@
 
         <ul class="unstyled">
             <li class="well" ng-repeat="act in activity">
-                <h2>{{act.Name}}</h2>
-                {{act.Note}}
+                <form ng-submit="delete()">
+                    <h2>{{act.Name}}</h2>
+                    {{act.Note}}
+                    <span class="pull-right"><a href="#" ng-click="delete( act.Id )"><i class="icon-trash"></i></a></span>
+                </form>
             </li>
         </ul>
     </div>

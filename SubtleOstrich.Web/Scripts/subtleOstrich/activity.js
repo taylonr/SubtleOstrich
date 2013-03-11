@@ -4,7 +4,7 @@
         when('/', { controller: ActivityControl, templateUrl: 'list' }).
         otherwise({ redirectTo: '/' });
   }).factory('Activity', function ($resource) {    
-    var Activity = $resource('/Home/ActivityList', {name: '@Name', date: '@Date'});
+    var Activity = $resource('/Home/ActivityList', {name: '@Name', date: '@Date', id: '@Id'});
 
     return Activity;
 });
@@ -17,5 +17,10 @@ function ActivityControl($scope, Activity) {
         var act = new Activity({ Name: $scope.name, Date: $scope.date });
         act.$save();
         $scope.name = '';
+    };
+
+    $scope.delete = function(id) {
+        var act = new Activity({ Id: id });
+        act.$remove();
     };
 }

@@ -61,5 +61,12 @@ namespace SubtleOstrich.Web.Controllers
             var u = new User("240747413", "twitter");
             u.AddRecord(occ.Name, new Record(occ.Date, occ.Note));
         }
+
+        [HttpDelete]
+        public void ActivityList(string id)
+        {
+            var u = new User("240747413", "twitter");
+            u.DeleteRecord(id);
+        }
     }
 }
