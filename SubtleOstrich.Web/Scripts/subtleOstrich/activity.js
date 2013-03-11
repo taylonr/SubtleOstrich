@@ -19,7 +19,12 @@ function ActivityControl($scope, Activity) {
         $scope.name = '';
     };
 
-    $scope.delete = function(id) {
+    $scope.delete = function (id) {
+        for (var i = 0; i < $scope.activity.length; i++) {
+            if($scope.activity[i].Id == id) {
+                $scope.activity.splice(i, 1);
+            }
+        }
         var act = new Activity({ Id: id });
         act.$remove();
     };
