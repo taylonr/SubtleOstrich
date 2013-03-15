@@ -19,18 +19,17 @@ function ActivityControl($scope, $location, Activity) {
             $scope.activity.push({ Name: a.Name, Id : a.Id });
         });
         $scope.name = '';
-
     };
 
     $scope.delete = function (id) {
-        //for (var i = 0; i < $scope.activity.length; i++) {
-        //    if($scope.activity[i].Id == id) {
-        //        $scope.activity.splice(i, 1);
-        //    }
-        //}
+
         var act = new Activity({ Id: id });
-        act.$remove();
-        $location.path('/Home/ActivityList');
-        $scope.$apply();
+        act.$remove(function (a) {
+            for (var i = 0; i < $scope.activity.length; i++) {
+                if($scope.activity[i].Id == id) {
+                    $scope.activity.splice(i, 1);
+                }
+            }
+        });
     };
 }
