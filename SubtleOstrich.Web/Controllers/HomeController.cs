@@ -53,13 +53,14 @@ namespace SubtleOstrich.Web.Controllers
         }
 
         [HttpPost]
-        public void ActivityList(Occurrence occ)
+        public JsonResult ActivityList(Occurrence occ)
         {
             if(occ.Date == DateTime.MinValue)
                 occ.Date = DateTime.Today;
 
             var u = new User("240747413", "twitter");
-            u.AddRecord(occ.Name, new Record(occ.Date, occ.Note));
+            occ.Id = u.AddRecord(occ.Name, new Record(occ.Date, occ.Note));
+            return Json(occ, JsonRequestBehavior.AllowGet);
         }
 
         [HttpDelete]

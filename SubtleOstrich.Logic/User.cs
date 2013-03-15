@@ -46,7 +46,7 @@ namespace SubtleOstrich.Logic
             return Activities.Sum(activity => activity.GetMonthlyTotal(month));
         }
 
-        public void AddRecord(string activityName, Record record)
+        public string AddRecord(string activityName, Record record)
         {
             var activity = Activities.FirstOrDefault(act => act.Name.Equals(activityName, StringComparison.InvariantCultureIgnoreCase));
             if (activity == null)
@@ -58,6 +58,8 @@ namespace SubtleOstrich.Logic
             activity.AddRecord(record);
 
             Save();
+
+            return record.Id;
         }
 
         public int GetYearTotal(int year)
