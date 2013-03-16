@@ -1,58 +1,76 @@
-// ALERT STYLES
-// ------------
+//
+// Alerts
+// --------------------------------------------------
 
-// Base alert styles
+
+// Base styles
+// -------------------------
+
 .alert {
-  padding: 8px 35px 8px 14px;
-  margin-bottom: @baseLineHeight;
-  text-shadow: 0 1px 0 rgba(255,255,255,.5);
-  background-color: @warningBackground;
-  border: 1px solid @warningBorder;
-  .border-radius(4px);
-  color: @warningText;
+    padding: 8px 35px 8px 14px;
+    margin-bottom: @baseLineHeight;
+       text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-color: @warningBackground;
+    border: 1px solid @warningBorder;
+    .border-radius(4px);
+    color: @warningText;
+
+    background-image: -moz-linear-gradient(center top , @warningBackground,  darken(@warningBackground, 10%));
 }
-.alert-heading {
-  color: inherit;
+.alert h4 {
+    margin: 0;
 }
 
 // Adjust close link position
 .alert .close {
-  position: relative;
-  top: -2px;
-  right: -21px;
-  line-height: 18px;
+    position: relative;
+    top: -2px;
+    right: -21px;
+    line-height: @baseLineHeight;
 }
 
+
 // Alternate styles
-// ----------------
+// -------------------------
 
 .alert-success {
-  background-color: @successBackground;
-  border-color: @successBorder;  
-  color: @successText;
+    background-color: @successBackground;
+    border-color: @successBorder;
+    color: @successText;
+    background-image: -moz-linear-gradient(center top , lighten(@successBackground,15%),  @successBackground);
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .alert-danger,
 .alert-error {
-  background-color: @errorBackground;
-  border-color: @errorBorder;
-  color: @errorText;
-}
-.alert-info {
-  background-color: @infoBackground;
-  border-color: @infoBorder;
-  color: @infoText;
+    background-color: @errorBackground;
+    border-color: @errorBorder;
+    color: @errorText;
+    background-image: -moz-linear-gradient(center top , lighten(@errorBackground,15%),  @errorBackground);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
+
+
+.alert-info {
+    background-color: @infoBackground;
+    border-color: @infoBorder;
+    color: @infoText;
+     background-image: -moz-linear-gradient(center top , lighten(@infoBackground,15%),  @infoBackground);
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+
 // Block alerts
-// ------------------------
+// -------------------------
+
 .alert-block {
-  padding-top: 14px;
-  padding-bottom: 14px;
+    padding-top: 14px;
+    padding-bottom: 14px;
 }
 .alert-block > p,
 .alert-block > ul {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 .alert-block p + p {
-  margin-top: 5px;
+    margin-top: 5px;
 }

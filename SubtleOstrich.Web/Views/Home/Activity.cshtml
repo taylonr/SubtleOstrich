@@ -2,13 +2,68 @@
     ViewBag.Title = "Activity";
 }
 <script src="@Url.Content("~/Scripts/subtleOstrich/activity.js")"></script>
+<div class="span2 pull-left">
+    <div class="aqua-panel">
+        <div class="aqua-panel-header">
+            <h2>March</h2>
+        </div>
+            <div class="info-panel clearfix">
+                <div class="span1">
+                    <a href="#" class="aqua-shortcut text-align-center">
+                        <span class="modernpics newline">120</span>
+                        <span class="label label-info">Sparring</span>
+                    </a>
+                </div>
+
+                <div class="span1">
+                    <a href="#" class="aqua-shortcut text-align-center">
+                        <span class="modernpics newline">20</span>
+                        <span class="label label-info">Technique</span>
+                    </a>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+<div class="span2 pull-right">
+    <div class="aqua-panel">
+        <div class="aqua-panel-header">
+            <h2>2013</h2>
+        </div>
+        <div class="aqua-panel-content">
+            <div class="info-panel clearfix">
+                <div class="span1">
+                    <a href="#" class="aqua-shortcut text-align-center">
+                        <span class="modernpics newline">24</span>
+                        <span class="label label-info">Sparring</span>
+                    </a>
+                </div>
+
+                <div class="span1">
+                    <a href="#" class="aqua-shortcut text-align-center">
+                        <span class="modernpics newline">40</span>
+                        <span class="label label-info">Technique</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+    
+
 <div class="row">
     <div class="span8 offset4" ng-controller="ActivityControl">
         <form ng-submit="save()">
-            <div>Today I did
-                <input type="hidden" ng-model="date"/>
+            <div>
+                Today I did
+                <input type="hidden" ng-model="date" />
                 <input type="text" ng-model="name" required />
                 <input class="btn-primary" type="submit" value="add">
+                <br />
+                <textarea ng-model="notes" />
+
             </div>
         </form>
 

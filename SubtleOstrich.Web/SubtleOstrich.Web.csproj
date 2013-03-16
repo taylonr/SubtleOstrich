@@ -181,7 +181,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.nuget.readme.txt" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings-blue.png" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings-white.png" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
     <Content Include="Content\bootstrap\js\bootstrap-alert.js" />
@@ -196,6 +196,15 @@
     <Content Include="Content\bootstrap\js\bootstrap-tooltip.js" />
     <Content Include="Content\bootstrap\js\bootstrap-transition.js" />
     <Content Include="Content\bootstrap\js\bootstrap-typeahead.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\js\guiders-1.2.8.js" />
+    <Content Include="Content\bootstrap\js\jquery.ba-bbq.js" />
+    <Content Include="Content\bootstrap\js\jquery.min.js" />
+    <Content Include="Content\bootstrap\js\jquery.yii.js" />
+    <Content Include="Content\bootstrap\js\jquery.yiiactiveform.js" />
+    <Content Include="Content\bootstrap\js\jquery.yiigridview.js" />
+    <Content Include="Content\bootstrap\js\jquery.yiilistview.js" />
+    <Content Include="Content\bootstrap\js\prettify.js" />
     <Content Include="Content\bootstrap\js\tests\index.html" />
     <Content Include="Content\bootstrap\js\tests\unit\bootstrap-alert.js" />
     <Content Include="Content\bootstrap\js\tests\unit\bootstrap-button.js" />
@@ -211,6 +220,12 @@
     <Content Include="Content\bootstrap\js\tests\vendor\jquery.js" />
     <Content Include="Content\bootstrap\js\tests\vendor\qunit.css" />
     <Content Include="Content\bootstrap\js\tests\vendor\qunit.js" />
+    <Content Include="Content\css\aquablue.css.txt" />
+    <Content Include="Content\css\guiders-1.2.8.css" />
+    <Content Include="Content\css\guider_arrows.png" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\themes\prettify.css" />
+    <Content Include="Content\css\x_close_button.jpg" />
     <Content Include="Content\google-code-prettify\prettify.css" />
     <Content Include="Content\google-code-prettify\prettify.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -314,6 +329,13 @@
       <Compile>True</Compile>
       <Minify>True</Minify>
     </Content>
+    <Content Include="Content\bootstrap\less\aquablue.less" />
+    <Content Include="Content\bootstrap\less\labels-badges.less" />
+    <Content Include="Content\bootstrap\less\responsive-1200px-min.less" />
+    <Content Include="Content\bootstrap\less\responsive-767px-max.less" />
+    <Content Include="Content\bootstrap\less\responsive-768px-979px.less" />
+    <Content Include="Content\bootstrap\less\responsive-navbar.less" />
+    <Content Include="Content\bootstrap\less\responsive-utilities.less" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.min.js" />
@@ -512,7 +534,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
