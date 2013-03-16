@@ -7,6 +7,7 @@
         <div class="aqua-panel-header">
             <h2>March</h2>
         </div>
+        <div class="aqua-panel-content">
             <div class="info-panel clearfix">
                 <div class="span1">
                     <a href="#" class="aqua-shortcut text-align-center">
@@ -22,9 +23,31 @@
                     </a>
                 </div>
             </div>
-        
+        </div>
     </div>
 </div>
+
+    <div class="span3 pull-left" ng-controller="ActivityControl">
+        <form ng-submit="save()">
+            <div>
+                Today I did
+                <input type="hidden" ng-model="date" />
+                <input type="text" ng-model="name" required />
+                <input class="btn-primary" type="submit" value="add">
+       </div>
+        </form>
+
+        <ul class="unstyled">
+            <li class="aqua-well-mini" ng-repeat="act in activity">
+                <form ng-submit="delete()">
+                    <h2>{{act.Name}}</h2>
+                    {{act.Note}}
+                    <span class="pull-right"><a href="#" ng-click="delete( act.Id )"><i class="icon-trash-blue"></i></a></span>
+                </form>
+            </li>
+        </ul>
+    </div>
+
 
 <div class="span2 pull-right">
     <div class="aqua-panel">
@@ -49,33 +72,6 @@
             </div>
         </div>
         
-    </div>
-</div>
-    
-
-<div class="row">
-    <div class="span8 offset4" ng-controller="ActivityControl">
-        <form ng-submit="save()">
-            <div>
-                Today I did
-                <input type="hidden" ng-model="date" />
-                <input type="text" ng-model="name" required />
-                <input class="btn-primary" type="submit" value="add">
-                <br />
-                <textarea ng-model="notes" />
-
-            </div>
-        </form>
-
-        <ul class="unstyled">
-            <li class="well" ng-repeat="act in activity">
-                <form ng-submit="delete()">
-                    <h2>{{act.Name}}</h2>
-                    {{act.Note}}
-                    <span class="pull-right"><a href="#" ng-click="delete( act.Id )"><i class="icon-trash"></i></a></span>
-                </form>
-            </li>
-        </ul>
     </div>
 </div>
 
