@@ -11,7 +11,7 @@
             <div class="info-panel clearfix">
                     <div class="span1" ng-repeat="d in dashboard.Activities">
                     <a href="#" class="aqua-shortcut text-align-center">
-                        <span class="modernpics newline">{{d.Value}}</span>
+                        <span class="stat-value newline">{{d.Value}}</span>
                         <span class="label ">{{d.Name}}</span>
                     </a>
                 </div>
@@ -23,9 +23,10 @@
     <div id="activity" class="span4 pull-left" ng-controller="ActivityControl">
         <form ng-submit="save()">
             <div>
+                <span id="previousDate" class="modernpics icons48 icons-black"><</span><span class="date">Today</span><span class="modernpics icons48 icons-black">></span>
                 <input type="hidden" ng-model="date" />
                 <input  type="text" ng-model="name" placeholder="What did you do today?" required />
-       </div>
+            </div>
         </form>
 
         <ul class="unstyled">
@@ -49,7 +50,7 @@
             <div class="info-panel clearfix">
                     <div class="span1" ng-repeat="d in dashboard.Activities">
                     <a href="#" class="aqua-shortcut text-align-center">
-                        <span class="modernpics newline">{{d.Value}}</span>
+                        <span class="stat-value newline">{{d.Value}}</span>
                         <span class="label ">{{d.Name}}</span>
                     </a>
                 </div>
