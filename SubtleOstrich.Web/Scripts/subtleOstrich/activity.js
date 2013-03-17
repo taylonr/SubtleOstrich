@@ -1,13 +1,21 @@
 ﻿angular.module('activity', ['ngResource']).
-  config(function ($routeProvider) {
-      $routeProvider.
-        when('/', { controller: ActivityControl, templateUrl: 'list' }).
-        otherwise({ redirectTo: '/' });
-  }).factory('Activity', function ($resource) {    
-    var Activity = $resource('/Home/ActivityList', {name: '@Name', date: '@Date', id: '@Id'});
+    config(function($routeProvider) {
+        $routeProvider.
+            when('/', { controller: ActivityControl, templateUrl: 'list' }).
+            when('/MonthDashboard', { controller: MonthDashboardController }).
+            when('/YearDashboard', {controller: YearDashboardController}).
+            otherwise({ redirectTo: '/' });
+    }).factory('Activity', function($resource) {
+        var Activity = $resource('ActivityList', { name: '@Name', date: '@Date', id: '@Id' });
 
-    return Activity;
-});
+        return Activity;
+    }).factory('Dashboard', function($resource) {
+        var Dashboard = $resource('MonthDashboard');
+
+        return Dashboard;
+    }).factory('YearDashboard', function($resource) {
+        return $resource('YearDashboard');
+    });
 
 function ActivityControl($scope, $location, Activity) {
     $scope.date = new Date();
@@ -32,4 +40,12 @@ function ActivityControl($scope, $location, Activity) {
             }
         });
     };
+}
+
+function MonthDashboardController($scope, $location, Dashboard) {
+    $scope.dashboard = Dashboard.get();
+}
+
+function YearDashboardController($scope, $location, Dashboard) {
+    $scope.dashboard = Dashboard.get();
 }

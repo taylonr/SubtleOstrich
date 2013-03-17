@@ -2,22 +2,19 @@
     ViewBag.Title = "Activity";
 }
 <script src="@Url.Content("~/Scripts/subtleOstrich/activity.js")"></script>
-<div class="sidebar pull-left">
+<div class="sidebar pull-left" ng-controller="MonthDashboardController">
     <div class="aqua-panel">
         <div class="aqua-panel-header">
-            <h2>March</h2>
+            <h2>March ({{dashboard.Total}})</h2>
         </div>
         <div class="aqua-panel-content">
             <div class="info-panel clearfix">
-                @for(var i = 1; i <= 4; i++)
-                {
-                    <div class="span1">
+                    <div class="span1" ng-repeat="d in dashboard.Activities">
                     <a href="#" class="aqua-shortcut text-align-center">
-                        <span class="modernpics newline">@(i*10)</span>
-                        <span class="label ">Sparring @i</span>
+                        <span class="modernpics newline">{{d.Value}}</span>
+                        <span class="label ">{{d.Name}}</span>
                     </a>
                 </div>
-                }
             </div>
         </div>
     </div>
@@ -45,29 +42,21 @@
     </div>
 
 
-<div class="sidebar pull-right">
+<div class="sidebar pull-right" ng-controller="YearDashboardController">
     <div class="aqua-panel">
         <div class="aqua-panel-header">
-            <h2>2013</h2>
+            <h2>2013 ({{dashboard.Total}})</h2>
         </div>
         <div class="aqua-panel-content">
             <div class="info-panel clearfix">
-                <div class="span1">
+                    <div class="span1" ng-repeat="d in dashboard.Activities">
                     <a href="#" class="aqua-shortcut text-align-center">
-                        <span class="modernpics newline">24</span>
-                        <span class="label label-info">Sparring</span>
-                    </a>
-                </div>
-
-                <div class="span1">
-                    <a href="#" class="aqua-shortcut text-align-center">
-                        <span class="modernpics newline">40</span>
-                        <span class="label label-info">Technique</span>
+                        <span class="modernpics newline">{{d.Value}}</span>
+                        <span class="label ">{{d.Name}}</span>
                     </a>
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
 
