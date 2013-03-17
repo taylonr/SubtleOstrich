@@ -5,7 +5,7 @@
 <div class="sidebar pull-left" ng-controller="MonthDashboardController">
     <div class="aqua-panel">
         <div class="aqua-panel-header">
-            <h2>March ({{dashboard.Total}})</h2>
+            <h2>{{dashboard.Title}} ({{dashboard.Total}})</h2>
         </div>
         <div class="aqua-panel-content">
             <div class="info-panel clearfix">
@@ -31,7 +31,7 @@
         </form>
 
         <ul class="unstyled">
-            <li class="aqua-well-mini" ng-repeat="act in activity">
+            <li class="well" ng-repeat="act in activity">
                 <form ng-submit="delete()">
                     <h2>{{act.Name}}</h2>
                     {{act.Note}}
@@ -45,7 +45,7 @@
 <div class="sidebar pull-right" ng-controller="YearDashboardController">
     <div class="aqua-panel">
         <div class="aqua-panel-header">
-            <h2>2013 ({{dashboard.Total}})</h2>
+            <h2>{{dashboard.Title}} ({{dashboard.Total}})</h2>
         </div>
         <div class="aqua-panel-content">
             <div class="info-panel clearfix">

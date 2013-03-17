@@ -74,8 +74,7 @@ namespace SubtleOstrich.Web.Controllers
         public JsonResult MonthDashboard()
         {
             var u = new User("240747413", "twitter");
-            var dashboard = u.GetMonthDashboard();
-            return Json(dashboard, JsonRequestBehavior.AllowGet);
+            return Json(u.GetMonthDashboard(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

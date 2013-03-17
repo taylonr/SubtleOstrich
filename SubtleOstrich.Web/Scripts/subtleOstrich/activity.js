@@ -24,7 +24,8 @@ function ActivityControl($scope, $location, Activity) {
     $scope.save = function () {
         var act = new Activity({ Name: $scope.name, Date: $scope.date });
         act.$save(function (a, putResponseHeaders) {
-            $scope.activity.push({ Name: a.Name, Id : a.Id });
+            $scope.activity.push({ Name: a.Name, Id: a.Id });
+            $scope.$emit('listUpdated');
         });
         $scope.name = '';
     };
@@ -36,6 +37,7 @@ function ActivityControl($scope, $location, Activity) {
             for (var i = 0; i < $scope.activity.length; i++) {
                 if($scope.activity[i].Id == id) {
                     $scope.activity.splice(i, 1);
+                    $scope.$emit('listUpdated');
                 }
             }
         });
@@ -46,6 +48,6 @@ function MonthDashboardController($scope, $location, Dashboard) {
     $scope.dashboard = Dashboard.get();
 }
 
-function YearDashboardController($scope, $location, Dashboard) {
-    $scope.dashboard = Dashboard.get();
+function YearDashboardController($scope, $location, YearDashboard) {
+    $scope.dashboard = YearDashboard.get();
 }

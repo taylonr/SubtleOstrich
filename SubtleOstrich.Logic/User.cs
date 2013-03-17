@@ -98,7 +98,8 @@ namespace SubtleOstrich.Logic
             return new Dashboard
                 {
                     Activities = Activities.OrderByDescending(act => act.GetMonthlyTotal(month)).Select(x => new Status(x.Name, x.GetMonthlyTotal(month))).Take(4),
-                    Total = GetMonthTotal(month)
+                    Total = GetMonthTotal(month),
+                    Title = DateTime.Now.ToString("MMMM")
                 };
         }
 
@@ -108,7 +109,8 @@ namespace SubtleOstrich.Logic
             return new Dashboard
                 {
                     Activities = Activities.OrderByDescending(act => act.GetYearlyTotal(year)).Select(x => new Status(x.Name, x.GetYearlyTotal(year))).Take(4),
-                    Total = GetYearTotal(year)
+                    Total = GetYearTotal(year),
+                    Title = year.ToString()
                 };
         }
     }
