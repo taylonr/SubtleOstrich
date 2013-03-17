@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FakeItEasy;
 using NUnit.Framework;
@@ -45,7 +46,7 @@ namespace SubtleOstrich.Logic.UnitTests
         [Test]
         public void DeleteRecord_Should_Remove_Record_From_Activity()
         {
-            _user.AddRecord("technique", new Record{Date = new DateTime(2013, 3, 1), Id = "a"});
+            _user.AddRecord("technique", new Record { Date = new DateTime(2013, 3, 1), Id = "a" });
             _user.DeleteRecord("a");
             _user.Activities.FirstOrDefault(x => x.Name == "technique").Records.Any().ShouldBeFalse();
         }
@@ -109,6 +110,79 @@ namespace SubtleOstrich.Logic.UnitTests
         {
             _user.GetActivities(DateTime.Today);
             A.CallTo(() => _repo.GetActivities(A<string>._, DateTime.Today)).MustHaveHappened();
+        }
+
+        [Test]
+        public void GetMonthDashboard_Should_Return_4_Activities()
+        {
+            AddActivities();
+
+            var dashboard = _user.GetMonthDashboard();
+            dashboard.Activities.Count().ShouldEqual(4);
+        }
+
+        [Test]
+        public void GetMonthDashboard_Should_Return_Top_Activities()
+        {
+            AddActivities();
+
+            var dashboard = _user.GetMonthDashboard();
+            dashboard.Activities.Any(x => x.Name == "A").ShouldBeFalse();
+        }
+
+        [Test]
+        public void GetMonthDashboard_Should_Return_Monthly_Total()
+        {
+            AddActivities();
+
+            var dashboard = _user.GetMonthDashboard();
+            dashboard.Total.ShouldEqual(9);
+        }
+
+        [Test]
+        public void GetMonthDashboard_Should_Return_Status()
+        {
+            AddActivities();
+            _user.GetMonthDashboard().Activities.First().ShouldBeType<Status>();
+        }
+
+        [Test]
+        public void GetMonthDashboard_Should_Return_Total_For_Activity()
+        {
+            AddActivities();
+            _user.GetMonthDashboard().Activities.First().Value.ShouldEqual(2);
+        }
+
+        [Test]
+        public void GetYearDashboard_Should_Return_4_Activities()
+        {
+            AddActivities();
+            var dashboard = _user.GetYearDashboard();
+            dashboard.Activities.Count().ShouldEqual(4);
+        }
+
+        [Test]
+        public void GetYearDashboard_Should_Return_Top_Activities()
+        {
+            AddActivities();
+            var dashboard = _user.GetYearDashboard();
+            dashboard.Activities.Any(x => x.Name == "A").ShouldBeFalse();
+        }
+
+        [Test]
+        public void GetYearDashboard_Should_Return_Total()
+        {
+            AddActivities();
+            _user.GetYearDashboard().Total.ShouldEqual(9);
+        }
+
+        private void AddActivities()
+        {
+            _user.AddActivity(new Activity("A") {Records = new List<Record> {new Record(DateTime.Today)}});
+            _user.AddActivity(new Activity("B") {Records = new List<Record> {new Record(DateTime.Today), new Record(DateTime.Today)}});
+            _user.AddActivity(new Activity("C") {Records = new List<Record> {new Record(DateTime.Today), new Record(DateTime.Today)}});
+            _user.AddActivity(new Activity("D") {Records = new List<Record> {new Record(DateTime.Today), new Record(DateTime.Today)}});
+            _user.AddActivity(new Activity("E") {Records = new List<Record> {new Record(DateTime.Today), new Record(DateTime.Today)}});
         }
     }
 }

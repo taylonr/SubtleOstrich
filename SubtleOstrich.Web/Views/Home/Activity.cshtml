@@ -9,19 +9,15 @@
         </div>
         <div class="aqua-panel-content">
             <div class="info-panel clearfix">
-                <div class="span1">
+                @for(var i = 1; i <= 4; i++)
+                {
+                    <div class="span1">
                     <a href="#" class="aqua-shortcut text-align-center">
-                        <span class="modernpics newline">120</span>
-                        <span class="label label-info">Sparring</span>
+                        <span class="modernpics newline">@(i*10)</span>
+                        <span class="label ">Sparring @i</span>
                     </a>
                 </div>
-
-                <div class="span1">
-                    <a href="#" class="aqua-shortcut text-align-center">
-                        <span class="modernpics newline">20</span>
-                        <span class="label label-info">Technique</span>
-                    </a>
-                </div>
+                }
             </div>
         </div>
     </div>

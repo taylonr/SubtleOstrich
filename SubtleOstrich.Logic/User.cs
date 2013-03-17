@@ -72,6 +72,8 @@ namespace SubtleOstrich.Logic
             _repo.Save(this);
         }
 
+
+
         public IEnumerable<Occurrence> GetActivities(DateTime date)
         {
             var activities = _repo.GetActivities(Id, date);
@@ -88,6 +90,26 @@ namespace SubtleOstrich.Logic
             var activity = Activities.FirstOrDefault(x => x.Records.Any(record => record.Id == id));
             activity.Records.Remove(activity.Records.FirstOrDefault(record => record.Id == id));
             Save();
+        }
+
+        public Dashboard GetMonthDashboard()
+        {
+            var month = DateTime.Now.Month;
+            return new Dashboard
+                {
+                    Activities = Activities.OrderByDescending(act => act.GetMonthlyTotal(month)).Select(x => new Status(x.Name, x.GetMonthlyTotal(month))).Take(4),
+                    Total = GetMonthTotal(month)
+                };
+        }
+
+        public Dashboard GetYearDashboard()
+        {
+            var year = DateTime.Now.Year;
+            return new Dashboard
+                {
+                    Activities = Activities.OrderByDescending(act => act.GetYearlyTotal(year)).Select(x => new Status(x.Name, x.GetYearlyTotal(year))).Take(4),
+                    Total = GetYearTotal(year)
+                };
         }
     }
 }
