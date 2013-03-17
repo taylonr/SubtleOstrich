@@ -20,13 +20,11 @@
     </div>
 </div>
 
-    <div class="span3 pull-left" ng-controller="ActivityControl">
+    <div id="activity" class="span4 pull-left" ng-controller="ActivityControl">
         <form ng-submit="save()">
             <div>
-                Today I did
                 <input type="hidden" ng-model="date" />
-                <input type="text" ng-model="name" required />
-                <input class="btn-primary" type="submit" value="add">
+                <input  type="text" ng-model="name" placeholder="What did you do today?" required />
        </div>
         </form>
 
@@ -35,7 +33,7 @@
                 <form ng-submit="delete()">
                     <h2>{{act.Name}}</h2>
                     {{act.Note}}
-                    <span class="pull-right"><a href="#" ng-click="delete( act.Id )"><i class="icon-trash-blue"></i></a></span>
+                    <span class="pull-right"><a href="#" ng-click="delete( act.Id )"><i class="icon-trash"></i></a></span>
                 </form>
             </li>
         </ul>
