@@ -27,7 +27,8 @@
 
 function ActivityControl($scope, $location, Activity, updateService) {
     $scope.date = new Date();
-    
+    $scope.showNextArrow = false;
+
     function getItems() {
         $scope.activity = Activity.query({ date: $scope.date.toUTCString() });
     }
@@ -45,13 +46,19 @@ function ActivityControl($scope, $location, Activity, updateService) {
 
     $scope.decreaseDate = function() {
         $scope.date.setDate($scope.date.getDate() - 1);
+        $scope.showNextArrow = true;
         getItems();
     };
 
     $scope.increaseDate = function() {
         if($scope.date.toDateString() !== new Date().toDateString()) {
             $scope.date.setDate($scope.date.getDate() + 1);
+            if($scope.date.toDateString() === new Date().toDateString()) {
+                $scope.showNextArrow = false;
+            }
             getItems();
+        }else {
+            $scope.showNextArrow = false;
         }
     };
 
