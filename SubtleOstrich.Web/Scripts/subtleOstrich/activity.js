@@ -1,7 +1,7 @@
 ﻿var activityModule = angular.module('activity', ['ngResource']).
     config(function($routeProvider) {
         $routeProvider.
-            when('/', { controller: ActivityControl, templateUrl: 'list' }).
+            when('/:date', { controller: ActivityControl, templateUrl: 'list' }).
             when('/MonthDashboard', { controller: MonthDashboardController }).
             when('/YearDashboard', { controller: YearDashboardController }).
             otherwise({ redirectTo: '/' });
@@ -27,7 +27,12 @@
 
 function ActivityControl($scope, $location, Activity, updateService) {
     $scope.date = new Date();
-    $scope.activity = Activity.query();
+    
+    function getItems() {
+        $scope.activity = Activity.query({ date: $scope.date.toUTCString() });
+    }
+
+    getItems();
 
     $scope.save = function () {
         var act = new Activity({ Name: $scope.name, Date: $scope.date });
@@ -36,6 +41,18 @@ function ActivityControl($scope, $location, Activity, updateService) {
             updateService.broadcastItem();
         });
         $scope.name = '';
+    };
+
+    $scope.decreaseDate = function() {
+        $scope.date.setDate($scope.date.getDate() - 1);
+        getItems();
+    };
+
+    $scope.increaseDate = function() {
+        if($scope.date.toDateString() !== new Date().toDateString()) {
+            $scope.date.setDate($scope.date.getDate() + 1);
+            getItems();
+        }
     };
 
     $scope.delete = function (id) {

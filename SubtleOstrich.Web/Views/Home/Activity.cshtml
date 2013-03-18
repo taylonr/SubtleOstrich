@@ -23,7 +23,7 @@
     <div id="activity" class="span4 pull-left" ng-controller="ActivityControl">
         <form ng-submit="save()">
             <div>
-                <span id="previousDate" class="modernpics icons48 icons-black"><</span><span class="date">Today</span><span class="modernpics icons48 icons-black">></span>
+                <span id="previousDate" class="modernpics icons48 icons-black" ng-click="decreaseDate()"><</span><span class="date">{{date.toLocaleDateString()}}</span><span class="modernpics icons48 icons-black" ng-click="increaseDate()">></span>
                 <input type="hidden" ng-model="date" />
                 <input  type="text" ng-model="name" placeholder="What did you do today?" required />
             </div>

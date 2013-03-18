@@ -205,6 +205,7 @@
     <Content Include="Content\bootstrap\js\jquery.yiigridview.js" />
     <Content Include="Content\bootstrap\js\jquery.yiilistview.js" />
     <Content Include="Content\bootstrap\js\prettify.js" />
+    <Content Include="Content\css\angular-ui.min.css" />
     <Content Include="Content\css\aquablue.css.txt" />
     <Content Include="Content\css\guiders-1.2.8.css" />
     <Content Include="Content\css\guider_arrows.png" />
@@ -353,6 +354,7 @@
     <Content Include="Scripts\angular-sanitize.js" />
     <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular-scenario.js" />
+    <Content Include="Scripts\angular-ui.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\i18n\angular-locale_am-et.js" />

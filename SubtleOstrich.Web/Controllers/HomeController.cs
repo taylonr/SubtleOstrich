@@ -45,10 +45,10 @@ namespace SubtleOstrich.Web.Controllers
             return View("Activity");
         }
 
-        public JsonResult ActivityList()
+        public JsonResult ActivityList(DateTime? date)
         {
             var u = new User("240747413", "twitter");
-            var activities = u.GetActivities(DateTime.Today);
+            var activities = u.GetActivities(date ?? DateTime.Today);
             return Json(activities, JsonRequestBehavior.AllowGet);
         }
 
