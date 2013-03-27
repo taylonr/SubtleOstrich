@@ -3,43 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using SubtleOstrich.Logic;
 
 namespace SubtleOstrich.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        public ActionResult List()
-        {
-            return View();
-        }
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         public ActionResult Activity()
         {
             return View("Activity");
@@ -47,6 +17,7 @@ namespace SubtleOstrich.Web.Controllers
 
         public JsonResult ActivityList(DateTime? date)
         {
+            Console.WriteLine(User.Identity.Name);
             var u = new User("240747413", "twitter");
             var activities = u.GetActivities(date ?? DateTime.Today);
             return Json(activities, JsonRequestBehavior.AllowGet);
