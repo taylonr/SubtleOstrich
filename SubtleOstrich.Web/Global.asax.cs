@@ -7,6 +7,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Script.Serialization;
+using System.Web.Security;
 using Autofac;
 using Autofac.Integration.Mvc;
 using SubtleOstrich.Web.Controllers;
@@ -83,6 +85,24 @@ namespace SubtleOstrich.Web
 
             builder.RegisterInstance(authenticationService).As<IAuthenticationService>();
             builder.RegisterType<AuthenticationController>().As<IAuthenticationCallbackProvider>();
+        }
+
+        protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                var serializer = new JavaScriptSerializer();
+
+                var serializeModel = serializer.Deserialize<CouchPrincipalSerializeModel>(authTicket.UserData);
+
+                var newUser = new CouchPrincipal(authTicket.Name) {Uid = serializeModel.Uid, Source = serializeModel.Source};
+
+                HttpContext.Current.User = newUser;
+            }
         }
     }
 }

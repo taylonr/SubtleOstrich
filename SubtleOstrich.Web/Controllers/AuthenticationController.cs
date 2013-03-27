@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 using SubtleOstrich.Logic;
 using WorldDomination.Web.Authentication.Mvc;
@@ -32,10 +33,38 @@ namespace SubtleOstrich.Web.Controllers
                 u = new User(model.AuthenticatedClient.UserInformation.Id, model.AuthenticatedClient.UserInformation.Name, model.AuthenticatedClient.ProviderName);
                 u.Save();
             }
-            var authTicket = new FormsAuthenticationTicket(u.Id, true, 60);
-            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
+
+            var serializeModel = new CouchPrincipalSerializeModel();
+            var id = u.Id.Split(':');
+
+            serializeModel.Uid = id[1];
+            serializeModel.Source = id[0];
+            serializeModel.Name  = u.Name;
+
+            var serializer = new JavaScriptSerializer();
+
+            string userData = serializer.Serialize(serializeModel);
+
+            var authTicket = new FormsAuthenticationTicket(
+                     1,
+                     u.Name,
+                     DateTime.Now,
+                     DateTime.Now.AddMinutes(15),
+                     false,
+                     userData);
+
+            string encTicket = FormsAuthentication.Encrypt(authTicket);
+            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
             context.Response.Cookies.Add(cookie);
             return RedirectToAction("Activity", "Home");
+        }
+    }
+
+    public class BaseController : Controller
+    {
+        protected virtual new CouchPrincipal User
+        {
+            get { return HttpContext.User as CouchPrincipal; }
         }
     }
 }

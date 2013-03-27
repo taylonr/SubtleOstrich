@@ -8,8 +8,13 @@ using SubtleOstrich.Logic;
 
 namespace SubtleOstrich.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult Activity()
         {
             return View("Activity");
@@ -17,8 +22,7 @@ namespace SubtleOstrich.Web.Controllers
 
         public JsonResult ActivityList(DateTime? date)
         {
-            Console.WriteLine(User.Identity.Name);
-            var u = new User("240747413", "twitter");
+            var u = new User(User.Uid, User.Source);
             var activities = u.GetActivities(date ?? DateTime.Today);
             return Json(activities, JsonRequestBehavior.AllowGet);
         }
@@ -29,7 +33,7 @@ namespace SubtleOstrich.Web.Controllers
             if (occ.Date == DateTime.MinValue)
                 occ.Date = DateTime.Today;
 
-            var u = new User("240747413", "twitter");
+            var u = new User(User.Uid, User.Source);
             occ.Id = u.AddRecord(occ.Name, new Record(occ.Date, occ.Note));
             return Json(occ, JsonRequestBehavior.AllowGet);
         }
@@ -37,21 +41,21 @@ namespace SubtleOstrich.Web.Controllers
         [HttpDelete]
         public void ActivityList(string id)
         {
-            var u = new User("240747413", "twitter");
+            var u = new User(User.Uid, User.Source);
             u.DeleteRecord(id);
         }
 
         [HttpGet]
         public JsonResult MonthDashboard()
         {
-            var u = new User("240747413", "twitter");
+            var u = new User(User.Uid, User.Source);
             return Json(u.GetMonthDashboard(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult YearDashboard()
         {
-            var u = new User("240747413", "twitter");
+            var u = new User(User.Uid, User.Source);
             return Json(u.GetYearDashboard(), JsonRequestBehavior.AllowGet);            
         }
 }
