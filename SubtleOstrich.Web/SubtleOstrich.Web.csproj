@@ -129,9 +129,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CouchPrincipal.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -512,16 +512,11 @@
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\Activity.cshtml" />
-    <Content Include="Views\Home\List.cshtml" />
-    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Activity\Activity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

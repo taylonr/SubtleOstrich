@@ -56,7 +56,7 @@ namespace SubtleOstrich.Web.Controllers
             string encTicket = FormsAuthentication.Encrypt(authTicket);
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
             context.Response.Cookies.Add(cookie);
-            return RedirectToAction("Activity", "Home");
+            return RedirectToAction("Index", "Activity");
         }
     }
 

@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using SubtleOstrich.Logic;
 
 namespace SubtleOstrich.Web.Controllers
 {
-    public class HomeController : BaseController
+    public class ActivityController : BaseController
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //
+        // GET: /Activity/
 
-        public ActionResult Activity()
+        public ActionResult Index()
         {
             return View("Activity");
         }
@@ -56,7 +53,7 @@ namespace SubtleOstrich.Web.Controllers
         public JsonResult YearDashboard()
         {
             var u = new User(User.Uid, User.Source);
-            return Json(u.GetYearDashboard(), JsonRequestBehavior.AllowGet);            
+            return Json(u.GetYearDashboard(), JsonRequestBehavior.AllowGet);
         }
-}
+    }
 }
