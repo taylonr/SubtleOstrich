@@ -14,6 +14,9 @@ namespace SubtleOstrich.Web.Controllers
 
         public ActionResult Index()
         {
+            if (User == null || !User.Identity.IsAuthenticated)
+                return View("LandingPage");
+
             return View("Activity");
         }
 
