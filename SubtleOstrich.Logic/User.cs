@@ -34,6 +34,13 @@ namespace SubtleOstrich.Logic
             Name = name;
         }
 
+        public static User CreateUser(string id, string name, string source)
+        {
+            var u = new User(id, name, source, new UserRepository());
+            u.Save();
+            return u;
+        }
+
         public void AddActivity(Activity activity)
         {
             Activities.Add(activity);

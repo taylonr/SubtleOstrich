@@ -27,7 +27,11 @@
                         <h1 class="aqua-slogan">Mat Time</h1>
                         <h2 class="aqua-slogan">A CouchJitsu App</h2>
                     </a>
-                    @if(!User.Identity.IsAuthenticated)
+                    @if(User.Identity.IsAuthenticated)
+                    {
+                       <a href='@Url.Action("Logout", "Authentication")' class="pull-right">Logout</a>
+                    }
+                    else
                     {
                         <a href="/authentication/redirect/facebook" class="pull-right"><img src="@Url.Content("~/Content/Images/facebooklogin.png")"/></a>
                     }

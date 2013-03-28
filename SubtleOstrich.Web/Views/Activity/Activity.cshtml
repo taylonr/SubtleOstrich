@@ -9,13 +9,16 @@
         </div>
         <div class="aqua-panel-content">
             <div class="info-panel clearfix">
-                    <div class="span1" ng-repeat="d in dashboard.Activities">
+                <div class="span1" ng-repeat="d in dashboard.Activities" ng-show="dashboard.Activities.length">
                     <a href="#" class="aqua-shortcut text-align-center">
                         <span class="stat-value newline">{{d.Value}}</span>
                         <span class="label ">{{d.Name}}</span>
                     </a>
                 </div>
             </div>
+                            <div ng-hide="dashboard.Activities.length">
+                    <span>This will show your top 4 activities for the month. Enter an activity (e.g. drilling) and it will show up.</span>
+                </div>
         </div>
     </div>
 </div>
@@ -48,11 +51,15 @@
         </div>
         <div class="aqua-panel-content">
             <div class="info-panel clearfix">
-                    <div class="span1" ng-repeat="d in dashboard.Activities">
+                
+                <div class="span1" ng-repeat="d in dashboard.Activities" ng-show="dashboard.Activities.length">
                     <a href="#" class="aqua-shortcut text-align-center">
                         <span class="stat-value newline">{{d.Value}}</span>
                         <span class="label ">{{d.Name}}</span>
                     </a>
+                </div>
+                <div ng-hide="dashboard.Activities.length">
+                    <span>This will show your top 4 activities for the year. Enter an activity (e.g. drilling) and it will show up.</span>
                 </div>
             </div>
         </div>

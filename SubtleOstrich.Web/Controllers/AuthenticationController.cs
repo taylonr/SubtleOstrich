@@ -29,10 +29,7 @@ namespace SubtleOstrich.Web.Controllers
             var u = _repository.GetBySourceAndId(model.AuthenticatedClient.ProviderName, model.AuthenticatedClient.UserInformation.Id);
 
             if (u == null)
-            {
-                u = new User(model.AuthenticatedClient.UserInformation.Id, model.AuthenticatedClient.UserInformation.Name, model.AuthenticatedClient.ProviderName);
-                u.Save();
-            }
+                u = Logic.User.CreateUser(model.AuthenticatedClient.UserInformation.Id, model.AuthenticatedClient.UserInformation.Name, model.AuthenticatedClient.ProviderName);
 
             var serializeModel = new CouchPrincipalSerializeModel();
             var id = u.Id.Split(':');
@@ -58,13 +55,11 @@ namespace SubtleOstrich.Web.Controllers
             context.Response.Cookies.Add(cookie);
             return RedirectToAction("Index", "Activity");
         }
-    }
 
-    public class BaseController : Controller
-    {
-        protected virtual new CouchPrincipal User
+        public ActionResult Logout()
         {
-            get { return HttpContext.User as CouchPrincipal; }
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Activity");
         }
     }
 }
