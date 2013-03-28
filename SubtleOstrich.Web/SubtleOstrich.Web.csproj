@@ -297,6 +297,8 @@
     <Content Include="Content\fonts\modernpics-webfont.svg" />
     <Content Include="Content\fonts\modernpics-webfont.ttf" />
     <Content Include="Content\fonts\modernpics-webfont.woff" />
+    <Content Include="AppSettingsProd.config" />
+    <None Include="Properties\PublishProfiles\Arvixe.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.min.js" />

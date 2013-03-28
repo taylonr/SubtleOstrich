@@ -49,7 +49,7 @@ namespace SubtleOstrich.Web.Controllers
                      1,
                      u.Name,
                      DateTime.Now,
-                     DateTime.Now.AddMinutes(15),
+                     DateTime.Now.AddYears(1),
                      false,
                      userData);
 

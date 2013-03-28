@@ -17,6 +17,7 @@ namespace SubtleOstrich.Web.Controllers
             return View("Activity");
         }
 
+        [Authorize]
         public JsonResult ActivityList(DateTime? date)
         {
             var u = new User(User.Uid, User.Source);
@@ -25,6 +26,7 @@ namespace SubtleOstrich.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public JsonResult ActivityList(Occurrence occ)
         {
             if (occ.Date == DateTime.MinValue)
@@ -36,6 +38,7 @@ namespace SubtleOstrich.Web.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public void ActivityList(string id)
         {
             var u = new User(User.Uid, User.Source);
@@ -43,6 +46,7 @@ namespace SubtleOstrich.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public JsonResult MonthDashboard()
         {
             var u = new User(User.Uid, User.Source);
@@ -50,6 +54,7 @@ namespace SubtleOstrich.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public JsonResult YearDashboard()
         {
             var u = new User(User.Uid, User.Source);

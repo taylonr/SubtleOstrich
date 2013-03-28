@@ -1,20 +1,20 @@
 ﻿var activityModule = angular.module('activity', ['ngResource']).
     config(function($routeProvider) {
         $routeProvider.
-            when('/:date', { controller: ActivityControl, templateUrl: 'list' }).
-            when('/MonthDashboard', { controller: MonthDashboardController }).
-            when('/YearDashboard', { controller: YearDashboardController }).
-            otherwise({ redirectTo: '/' });
+            when('/Activity/:date', { controller: ActivityControl, templateUrl: 'list' }).
+            when('/Activity/MonthDashboard', { controller: MonthDashboardController }).
+            when('/Activity/YearDashboard', { controller: YearDashboardController }).
+            otherwise({ redirectTo: '/Activity/' });
     }).factory('Activity', function($resource) {
-        var Activity = $resource('ActivityList', { name: '@Name', date: '@Date', id: '@Id' });
+        var Activity = $resource('Activity/ActivityList', { name: '@Name', date: '@Date', id: '@Id' });
 
         return Activity;
     }).factory('Dashboard', function($resource) {
-        var Dashboard = $resource('MonthDashboard');
+        var Dashboard = $resource('Activity/MonthDashboard');
 
         return Dashboard;
     }).factory('YearDashboard', function($resource) {
-        return $resource('YearDashboard');
+        return $resource('Activity/YearDashboard');
     }).factory('updateService', function($rootScope) {
         var updateService = { };
 
@@ -30,7 +30,12 @@ function ActivityControl($scope, $location, Activity, updateService) {
     $scope.showNextArrow = false;
 
     function getItems() {
-        $scope.activity = Activity.query({ date: $scope.date.toUTCString() });
+        $scope.activity = Activity.query({ date: $scope.date.toUTCString() }, function () {
+            $scope.typeAhead = [];
+            for (var i = 0; i < $scope.activity.length; i++) {
+                $scope.typeAhead.push($scope.activity[i].Name);
+            }
+        });
     }
 
     getItems();
@@ -39,6 +44,9 @@ function ActivityControl($scope, $location, Activity, updateService) {
         var act = new Activity({ Name: $scope.name, Date: $scope.date });
         act.$save(function (a, putResponseHeaders) {
             $scope.activity.push({ Name: a.Name, Id: a.Id });
+            if ($scope.typeAhead.indexOf(a.Name) == -1) {
+                $scope.typeAhead.push(a.Name);
+            }
             updateService.broadcastItem();
         });
         $scope.name = '';

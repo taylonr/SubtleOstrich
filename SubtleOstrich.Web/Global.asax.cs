@@ -36,23 +36,15 @@ namespace SubtleOstrich.Web
         //    AuthConfig.RegisterAuth();
         //}
 
-        private string _twitterConsumerKey;
-        private string _twitterConsumerSecret;
         private string _facebookAppId;
         private string _facebookAppSecret;
-        private string _googleConsumerKey;
-        private string _googleConsumerSecret;
-
+      
         protected void Application_Start()
         {
             var appSettings = ConfigurationManager.AppSettings;
-            _twitterConsumerKey = appSettings["TwitterKey"];
-            _twitterConsumerSecret = appSettings["TwitterSecret"];
             _facebookAppId = appSettings["FacebookKey"];
             _facebookAppSecret = appSettings["FacebookSecret"];
-            _googleConsumerKey = appSettings["GoogleKey"];
-            _googleConsumerSecret = appSettings["GoogleSecret"];
-
+    
             AreaRegistration.RegisterAllAreas();
 
             WorldDominationRouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -73,15 +65,11 @@ namespace SubtleOstrich.Web
 
         protected void ConfigureWorldDomination(ContainerBuilder builder)
         {
-            var twitterProvider = new TwitterProvider(_twitterConsumerKey, _twitterConsumerSecret);
             var facebookProvider = new FacebookProvider(_facebookAppId, _facebookAppSecret);
-            var googleProvider = new GoogleProvider(_googleConsumerKey, _googleConsumerSecret);
 
             var authenticationService = new AuthenticationService();
 
-            authenticationService.AddProvider(twitterProvider);
             authenticationService.AddProvider(facebookProvider);
-            authenticationService.AddProvider(googleProvider);
 
             builder.RegisterInstance(authenticationService).As<IAuthenticationService>();
             builder.RegisterType<AuthenticationController>().As<IAuthenticationCallbackProvider>();
