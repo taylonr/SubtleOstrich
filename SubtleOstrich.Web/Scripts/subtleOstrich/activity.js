@@ -33,14 +33,7 @@ function ActivityControl($scope, $http, $location, Activity, updateService) {
     $scope.showNextArrow = false;
 
     function getItems() {
-        $scope.activity = Activity.query({ date: $scope.date.toUTCString() }, function () {
-            for (var i = 0; i < $scope.activity.length; i++) {
-                if($scope.typeAhead.indexOf($scope.activity[i].Name == -1))
-                {
-                    $scope.typeAhead.push($scope.activity[i].Name);
-                } 
-            }
-        });
+        $scope.activity = Activity.query({ date: $scope.date.toUTCString() });
     }
 
     getItems();
@@ -49,9 +42,6 @@ function ActivityControl($scope, $http, $location, Activity, updateService) {
         var act = new Activity({ Name: $scope.name, Date: $scope.date });
         act.$save(function (a, putResponseHeaders) {
             $scope.activity.push({ Name: a.Name, Id: a.Id, Note: a.Note });
-            if ($scope.typeAhead.indexOf(a.Name) == -1) {
-                $scope.typeAhead.push(a.Name);
-            }
             updateService.broadcastItem();
         });
         $scope.name = '';
