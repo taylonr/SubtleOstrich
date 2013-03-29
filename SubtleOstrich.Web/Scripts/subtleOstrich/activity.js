@@ -1,4 +1,4 @@
-﻿var activityModule = angular.module('activity', ['ngResource']).
+﻿var activityModule = angular.module('activity', ['ngResource', '$strap.directives']).
     config(function($routeProvider) {
         $routeProvider.
             when('/Activity/:date', { controller: ActivityControl, templateUrl: 'list' }).
@@ -9,7 +9,10 @@
         var Activity = $resource('Activity/ActivityList', { name: '@Name', date: '@Date', id: '@Id' });
 
         return Activity;
-    }).factory('Dashboard', function($resource) {
+    }).factory('Typeahead', function ($resource) {
+        var Typeahead = $resource('Activity/AutoComplete');
+        return Typeahead;
+    }).factory('Dashboard', function ($resource) {
         var Dashboard = $resource('Activity/MonthDashboard');
 
         return Dashboard;
@@ -25,15 +28,17 @@
         return updateService;
     });
 
-function ActivityControl($scope, $location, Activity, updateService) {
+function ActivityControl($scope, $http, $location, Activity, updateService) {
     $scope.date = new Date();
     $scope.showNextArrow = false;
 
     function getItems() {
         $scope.activity = Activity.query({ date: $scope.date.toUTCString() }, function () {
-            $scope.typeAhead = [];
             for (var i = 0; i < $scope.activity.length; i++) {
-                $scope.typeAhead.push($scope.activity[i].Name);
+                if($scope.typeAhead.indexOf($scope.activity[i].Name == -1))
+                {
+                    $scope.typeAhead.push($scope.activity[i].Name);
+                } 
             }
         });
     }
@@ -82,6 +87,12 @@ function ActivityControl($scope, $location, Activity, updateService) {
             }
         });
     };
+
+    $scope.typeaheadFn = function(query, callback) {
+        $http.get('/activity/autocomplete?term=' + query).success(function(stations) {
+            callback(stations); // This will automatically open the popup with retrieved results
+        });
+    };
 }
 
 function MonthDashboardController($scope, Dashboard) {
@@ -100,6 +111,6 @@ function YearDashboardController($scope, YearDashboard) {
     });
 }
 
-ActivityControl.$inject = ['$scope', '$location', 'Activity', 'updateService'];
+ActivityControl.$inject = ['$scope', '$http', '$location', 'Activity', 'updateService'];
 MonthDashboardController.$inject = ['$scope', 'Dashboard'];
 YearDashboardController.$inject = ['$scope', 'YearDashboard'];

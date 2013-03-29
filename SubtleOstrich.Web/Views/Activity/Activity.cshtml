@@ -28,7 +28,7 @@
             <div>
                 <span id="previousDate" class="modernpics icons48 icons-black" ng-click="decreaseDate()"><</span><span class="date">{{date.toLocaleDateString()}}</span><span id="nextDate" class="modernpics icons48 icons-black" ng-click="increaseDate()" ng-show="showNextArrow">></span>
                 <input type="hidden" ng-model="date" />
-                <input  type="text" ng-model="name" placeholder="What did you do today?" required data-source="{{ typeAhead }}" data-provide="typeahead"/>
+                <input type="text" ng-model="name" placeholder="What did you do today?" data-min-length="0" bs-typeahead="typeaheadFn" required />
             </div>
         </form>
 

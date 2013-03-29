@@ -28,6 +28,13 @@ namespace SubtleOstrich.Web.Controllers
             return Json(activities, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult AutoComplete(string term)
+        {
+            var u = new User(User.Uid, User.Source);
+            var activities = u.Activities.Where(x => x.Name.ToLower().Contains(term.ToLower())).Select(x => x.Name).Distinct();
+            return Json(activities, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         [Authorize]
         public JsonResult ActivityList(Occurrence occ)
