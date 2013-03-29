@@ -43,7 +43,7 @@ function ActivityControl($scope, $location, Activity, updateService) {
     $scope.save = function () {
         var act = new Activity({ Name: $scope.name, Date: $scope.date });
         act.$save(function (a, putResponseHeaders) {
-            $scope.activity.push({ Name: a.Name, Id: a.Id });
+            $scope.activity.push({ Name: a.Name, Id: a.Id, Note: a.Note });
             if ($scope.typeAhead.indexOf(a.Name) == -1) {
                 $scope.typeAhead.push(a.Name);
             }

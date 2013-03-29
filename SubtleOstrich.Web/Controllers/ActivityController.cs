@@ -36,6 +36,13 @@ namespace SubtleOstrich.Web.Controllers
                 occ.Date = DateTime.Today;
 
             var u = new User(User.Uid, User.Source);
+            var text = occ.Name.Split(':');
+
+            occ.Name = text[0].Trim();
+
+            if (text.Length == 2)
+                occ.Note = text[1].Trim();
+
             occ.Id = u.AddRecord(occ.Name, new Record(occ.Date, occ.Note));
             return Json(occ, JsonRequestBehavior.AllowGet);
         }
