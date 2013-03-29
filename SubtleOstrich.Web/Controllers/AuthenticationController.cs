@@ -37,10 +37,11 @@ namespace SubtleOstrich.Web.Controllers
             serializeModel.Uid = id[1];
             serializeModel.Source = id[0];
             serializeModel.Name  = u.Name;
+            serializeModel.Picture = model.AuthenticatedClient.UserInformation.Picture;
 
             var serializer = new JavaScriptSerializer();
 
-            string userData = serializer.Serialize(serializeModel);
+            var userData = serializer.Serialize(serializeModel);
 
             var authTicket = new FormsAuthenticationTicket(
                      1,
@@ -50,7 +51,7 @@ namespace SubtleOstrich.Web.Controllers
                      false,
                      userData);
 
-            string encTicket = FormsAuthentication.Encrypt(authTicket);
+            var encTicket = FormsAuthentication.Encrypt(authTicket);
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
             context.Response.Cookies.Add(cookie);
             return RedirectToAction("Index", "Activity");

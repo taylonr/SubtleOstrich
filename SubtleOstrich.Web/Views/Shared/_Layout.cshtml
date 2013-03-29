@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using SubtleOstrich.Web.Controllers
+<!DOCTYPE html>
 <html lang="en" ng-app="activity">
 <head>
     <meta charset="utf-8" />
@@ -13,45 +14,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <link href="@Url.Content("~/Content/bootstrap/less/bootstrap.less")" rel="Stylesheet" />
+    
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+    @*<link href="@Url.Content("~/Content/bootstrap/less/bootstrap.less")" rel="Stylesheet" />*@
     <link href="@Url.Content("~/Content/site.less")" rel="Stylesheet" />
+    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular-resource.min.js"></script>
 </head>
-    <body>
-        <header>
-            <div id="aqua-header">
-                <div class="aqua-container">
-                    <a href="../index.html" class="aqua-well-mini">
-                        <h1 class="aqua-slogan">Mat Time</h1>
-                        <h2 class="aqua-slogan">A CouchJitsu App</h2>
-                    </a>
-                    @if(User.Identity.IsAuthenticated)
-                    {
-                       <a href='@Url.Action("Logout", "Authentication")' class="pull-right">Logout</a>
-                    }
-                    else
-                    {
-                        <a href="/authentication/redirect/facebook" class="pull-right"><img src="@Url.Content("~/Content/Images/facebooklogin.png")"/></a>
-                    }
-                </div>
-            </div>
-        </header>
-        <div class="aqua-container">
-            <div id="content">@RenderBody()</div>
-        </div>
-        <footer>
-            <div id="footer">
-                <div id="aqua-footer">
-                    <div class="aqua-container">
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+<body>
+    <header>
+        <div id="aqua-header">
+            <div class="aqua-container">
+                <a href="../index.html" class="aqua-well-mini">
+                    <h1 class="aqua-slogan">Mat Time</h1>
+                    <h2 class="aqua-slogan">A CouchJitsu App</h2>
+                </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="aqua-well-mini pull-right">
+                        <div class="aqua-user">
 
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
-    </body>
+                            <span class="aqua-user-name">@User.Identity.Name</span>
+
+                            <div class="btn-group">
+                                <a href="@Url.Action("Logout", "Authentication")" class="btn btn-small" tabindex="-1">Logout</a>
+                            </div>
+
+
+                        </div>
+                        <span class="aqua-avatar">
+                            <img src="@((User as CouchPrincipal).Picture)" alt="user" width="50" height="50" />
+                        </span>
+                    </div>
+                }
+                else
+                {
+                    <div class="aqua-well-mini pull-right">
+                        <div class="aqua-user">
+                            <div class="btn-group">
+                                <a href="/authentication/redirect/facebook" id="login" class="btn btn-small pull-right">Sign in with <i class="icon-facebook-sign"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </header>
+    <div class="aqua-container">
+        <div id="content">@RenderBody()</div>
+    </div>
+    <footer>
+        <div id="footer">
+            <div id="aqua-footer">
+                <div class="aqua-container">
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
 </html>

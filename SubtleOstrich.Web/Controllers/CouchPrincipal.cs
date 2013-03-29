@@ -12,6 +12,7 @@ namespace SubtleOstrich.Web.Controllers
       
         public string Uid { get; set; }
         public string Source { get; set; }
+        public string Picture { get; set; }
 
         public bool IsInRole(string role)
         {
@@ -26,5 +27,6 @@ namespace SubtleOstrich.Web.Controllers
         public string Uid { get; set; }
         public string Source { get; set; }
         public string Name { get; set; }
+        public string Picture { get; set; }
     }
 }

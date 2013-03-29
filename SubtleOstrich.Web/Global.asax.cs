@@ -87,7 +87,7 @@ namespace SubtleOstrich.Web
 
                 var serializeModel = serializer.Deserialize<CouchPrincipalSerializeModel>(authTicket.UserData);
 
-                var newUser = new CouchPrincipal(authTicket.Name) {Uid = serializeModel.Uid, Source = serializeModel.Source};
+                var newUser = new CouchPrincipal(authTicket.Name) {Uid = serializeModel.Uid, Source = serializeModel.Source, Picture = serializeModel.Picture};
 
                 HttpContext.Current.User = newUser;
             }
