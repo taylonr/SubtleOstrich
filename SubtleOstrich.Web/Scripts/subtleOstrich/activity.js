@@ -27,10 +27,11 @@
 
         return updateService;
     });
-
+    
 function ActivityControl($scope, $http, $location, Activity, updateService) {
     $scope.date = new Date();
     $scope.showNextArrow = false;
+    $scope.editing = false;
 
     function getItems() {
         $scope.activity = Activity.query({ date: $scope.date.toUTCString() });
@@ -45,6 +46,10 @@ function ActivityControl($scope, $http, $location, Activity, updateService) {
             updateService.broadcastItem();
         });
         $scope.name = '';
+    };
+
+    $scope.editDate = function() {
+        $scope.editing = true;
     };
 
     $scope.decreaseDate = function() {
