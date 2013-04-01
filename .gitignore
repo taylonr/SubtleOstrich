@@ -45,6 +45,6 @@ _ReSharper*/
 # Office Temp Files
 ~$*
 
-[Cc]onnection.config
-[Aa]ppSettings.config
+[Cc]onnection*.config
+[Aa]ppSettings*.config
 [Ww]eb.Release.config
