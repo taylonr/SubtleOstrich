@@ -307,10 +307,10 @@
     <Content Include="Content\fonts\modernpics-webfont.svg" />
     <Content Include="Content\fonts\modernpics-webfont.ttf" />
     <Content Include="Content\fonts\modernpics-webfont.woff" />
-    <Content Include="AppSettingsProd.config" />
     <Content Include="connectionProd.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="AppSettingsProd.config" />
     <None Include="Properties\PublishProfiles\Arvixe.pubxml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
