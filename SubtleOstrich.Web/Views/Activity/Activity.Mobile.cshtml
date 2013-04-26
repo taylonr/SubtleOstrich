@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Activity";
+}
+<script src="@Url.Content("~/Scripts/subtleOstrich/activity.js")"></script>
+
+<div id="activity" class="span7" ng-controller="ActivityControl">
+    <form ng-submit="save()">
+        <div id="date">
+            <span id="previousDate" class="modernpics icons48 icons-black" ng-click="decreaseDate()"><</span>
+            <span class="date">{{date.toLocaleDateString()}}</span>
+            <span id="nextDate" class="modernpics icons48 icons-black" ng-click="increaseDate()" ng-show="showNextArrow">></span>
+            <input type="hidden" ng-model="date" />
+            <input id="activityType" type="text" ng-model="name" placeholder="What did you do today?" data-min-length="0" bs-typeahead="typeaheadFn" required />
+        </div>
+    </form>
+
+    <ul class="unstyled">
+        <li class="well" ng-repeat="act in activity">
+            <form ng-submit="delete()">
+                <h2>{{act.Name}}</h2>
+                {{act.Note}}
+                <span class="pull-right"><a href="#" ng-click="delete( act.Id )"><i class="icon-trash"></i></a></span>
+            </form>
+        </li>
+    </ul>
+</div>
+
+<div class="sidebar" ng-controller="MonthDashboardController">
+    <div class="aqua-panel span7">
+        <div class="aqua-panel-header">
+            <h2>{{dashboard.Title}} ({{dashboard.Total}})</h2>
+        </div>
+        <div class="aqua-panel-content">
+            <div class="inpanel">
+                <div class="tab-content">
+                    <div class="span2" ng-repeat="d in dashboard.Activities" ng-show="dashboard.Activities.length">
+                        <a href="#" class="aqua-shortcut text-align-center">
+                            <span class="stat-value newline">{{d.Value}}</span>
+                            <span class="label ">{{d.Name}}</span>
+                        </a>
+                    </div>
+                    <div ng-hide="dashboard.Activities.length">
+                        <span>This will show your top 4 activities for the month. Enter an activity (e.g. drilling) and it will show up.</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="sidebar" ng-controller="YearDashboardController">
+    <div class="aqua-panel span7">
+        <div class="aqua-panel-header">
+            <h2>{{dashboard.Title}} ({{dashboard.Total}})</h2>
+        </div>
+        <div class="aqua-panel-content">
+            <div class="inpanel">
+                <div class="tab-content">
+                    <div class="span2" ng-repeat="d in dashboard.Activities" ng-show="dashboard.Activities.length">
+                        <a href="#" class="aqua-shortcut text-align-center">
+                            <span class="stat-value newline">{{d.Value}}</span>
+                            <span class="label ">{{d.Name}}</span>
+                        </a>
+                    </div>
+                    <div ng-hide="dashboard.Activities.length">
+                        <span>This will show your top 4 activities for the year. Enter an activity (e.g. drilling) and it will show up.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

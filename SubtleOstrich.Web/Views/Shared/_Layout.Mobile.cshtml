@@ -3,7 +3,7 @@
 <html lang="en" ng-app="activity">
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/css/style.css") />
+    <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/css/style.mobile.css") />
     <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/css/guiders-1.2.8.css") />
     <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/css/themes/prettify.css") />
     <script type="text/javascript" src=@Url.Content("~/Content/bootstrap/js/jquery.min.js")></script>
@@ -17,7 +17,7 @@
     
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
     @*<link href="@Url.Content("~/Content/bootstrap/less/bootstrap.less")" rel="Stylesheet" />*@
-    <link href="@Url.Content("~/Content/site.less")" rel="Stylesheet" />
+    <link href="@Url.Content("~/Content/site.mobile.less")" rel="Stylesheet" />
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular-resource.min.js"></script>
@@ -41,7 +41,7 @@
         <div id="aqua-header">
             <div class="aqua-container">
                 <a href="../index.html" class="aqua-well-mini">
-                    <h1 class="aqua-slogan">Mat Time</h1>
+                    <h1 class="aqua-slogan">MatTrack</h1>
                     <h2 class="aqua-slogan">A CouchJitsu App</h2>
                 </a>
                 @if (User.Identity.IsAuthenticated)
