@@ -541,7 +541,7 @@
     <Content Include="Views\Activity\LandingPage.cshtml" />
     <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
     <Content Include="Views\Activity\Activity.Mobile.cshtml" />
-    <Content Include="Views\Activity\MonthlyCalendar.cshtml" />
+    <Content Include="Views\Activity\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

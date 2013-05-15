@@ -10,7 +10,7 @@
         <div class="aqua-panel-content">
             <div class="info-panel clearfix">
                 <div class="span1" ng-repeat="d in dashboard.Activities" ng-show="dashboard.Activities.length">
-                    <a href="@Url.Action("MonthlyCalendar", "Activity")" class="aqua-shortcut text-align-center">
+                    <a href="@Url.Action("Calendar", "Activity")" class="aqua-shortcut text-align-center">
                         <span class="stat-value newline">{{d.Value}}</span>
                         <span class="label ">{{d.Name}}</span>
                     </a>
@@ -55,7 +55,7 @@
             <div class="info-panel clearfix">
 
                 <div class="span1" ng-repeat="d in dashboard.Activities" ng-show="dashboard.Activities.length">
-                    <a href="#" class="aqua-shortcut text-align-center">
+                    <a href="@Url.Action("Calendar", "Activity")" class="aqua-shortcut text-align-center">
                         <span class="stat-value newline">{{d.Value}}</span>
                         <span class="label ">{{d.Name}}</span>
                     </a>

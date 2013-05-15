@@ -79,7 +79,7 @@ namespace SubtleOstrich.Web.Controllers
         }
 
         [Authorize]
-        public ActionResult MonthlyCalendar()
+        public ActionResult Calendar()
         {
             return View();
         }
