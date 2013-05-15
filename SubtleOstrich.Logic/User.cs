@@ -120,5 +120,15 @@ namespace SubtleOstrich.Logic
                     Title = year.ToString()
                 };
         }
+
+        public IEnumerable<CalendarEvent> GetCalendarEvents(DateTime start, DateTime end)
+        {
+            var events = new List<CalendarEvent>();
+            foreach (var a in Activities)
+                events.AddRange(a.Records.Where(x => start <= x.Date || x.Date >= end)
+                    .Select(r => new CalendarEvent {title = a.Name, start = r.Date.ToUnixTimestamp()}));
+
+            return events;
+        }
     }
 }

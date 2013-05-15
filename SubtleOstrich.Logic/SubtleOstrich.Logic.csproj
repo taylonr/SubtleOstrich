@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityEntity.cs" />
+    <Compile Include="CalendarEvent.cs" />
     <Compile Include="Dashboard.cs" />
+    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="Occurrence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

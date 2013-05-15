@@ -6,6 +6,8 @@
 
 <script type="text/javascript">
     (function($) {
-        $('#calendar').fullCalendar({ });
+        $('#calendar').fullCalendar({
+            eventSources: ['/Activity/CalendarEvents']
+        });
     })(jQuery);
 </script>
