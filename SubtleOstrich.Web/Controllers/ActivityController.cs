@@ -77,5 +77,10 @@ namespace SubtleOstrich.Web.Controllers
             var u = new User(User.Uid, User.Source);
             return Json(u.GetYearDashboard(), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult MonthlyCalendar()
+        {
+            return View();
+        }
     }
 }
