@@ -20,7 +20,7 @@
     }).factory('YearDashboard', function($resource) {
         return $resource('Activity/YearDashboard');
     }).factory('Report', function ($resource) {
-        return $resource('YearReport');
+        return $resource('YearReport', { source: '@Source', uid: '@Uid' });
     }).factory('updateService', function ($rootScope) {
         var updateService = { };
 
@@ -109,11 +109,13 @@ function YearDashboardController($scope, YearDashboard) {
     });
 }
 
-function ReportController($scope, Report) {
-    $scope.dashboard = Report.get();
+function ReportController($scope, $location, Report) {
+    $scope.source = window.location.search.substring(1).split('&')[1].substring(7);
+    $scope.uid = window.location.search.substring(1).split('&')[0].substring(4);
+    $scope.dashboard = Report.get({ uid: $scope.uid, source: $scope.source });
 }
 
 ActivityControl.$inject = ['$scope', '$http', '$location', 'Activity', 'updateService'];
 MonthDashboardController.$inject = ['$scope', 'Dashboard'];
 YearDashboardController.$inject = ['$scope', 'YearDashboard'];
-ReportController.$inject = ['$scope', 'Report'];
+ReportController.$inject = ['$scope', '$location', 'Report'];
