@@ -3,8 +3,17 @@
 @{
     ViewBag.Title = "Report";
 }
+<script src="@Url.Content("~/Scripts/subtleOstrich/activity.js")"></script>
 
-<h2>Report</h2>
+<div ng-controller="ReportController">
+
+    <h2>Total: ({{dashboard.Total}})</h2>
+    <div ng-repeat="d in dashboard.Activities" ng-show="dashboard.Activities.length">
+        <div class="span2" id="reportSummary">
+            <h5><span class="label label-info">{{d.Name}}</span>: <span> {{d.Value}}</span></h5>
+        </div>
+    </div>
+</div>
 
 <input id="user" type="hidden" value="@Model.Id"/>
 <div id='calendar'></div>
@@ -13,7 +22,7 @@
     (function ($) {
         var id = $('#user').val();
         var url = '/Activity/ReportEvents?id=' + id;
-        
+
         $('#calendar').fullCalendar({
             defaultView: 'year',
             eventSources: [url]

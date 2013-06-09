@@ -93,6 +93,13 @@ namespace SubtleOstrich.Web.Controllers
             return Json(activities, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult YearReport()
+        {
+            var u = new User(User.Uid, User.Source);
+            var activities = u.GetYearReport(DateTime.Now.Year);
+
+            return Json(activities, JsonRequestBehavior.AllowGet);
+        }
         
         public ActionResult Report(string uid, string source)
         {

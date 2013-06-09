@@ -130,5 +130,15 @@ namespace SubtleOstrich.Logic
 
             return events;
         }
+
+        public Dashboard GetYearReport(int year)
+        {
+            return new Dashboard
+            {
+                Activities = Activities.OrderByDescending(act => act.GetYearlyTotal(year)).Select(x => new Status(x.Name, x.GetYearlyTotal(year))).ToList(),
+                Total = GetYearTotal(year),
+                Title = year.ToString()
+            };
+        }
     }
 }

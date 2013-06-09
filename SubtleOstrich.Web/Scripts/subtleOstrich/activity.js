@@ -4,6 +4,7 @@
             when('/Activity/:date', { controller: ActivityControl, templateUrl: 'list' }).
             when('/Activity/MonthDashboard', { controller: MonthDashboardController }).
             when('/Activity/YearDashboard', { controller: YearDashboardController }).
+            when('/Activity/YearReport', {controller: ReportController}).
             otherwise({ redirectTo: '/Activity/' });
     }).factory('Activity', function($resource) {
         var Activity = $resource('Activity/ActivityList', { name: '@Name', date: '@Date', id: '@Id' });
@@ -18,7 +19,9 @@
         return Dashboard;
     }).factory('YearDashboard', function($resource) {
         return $resource('Activity/YearDashboard');
-    }).factory('updateService', function($rootScope) {
+    }).factory('Report', function ($resource) {
+        return $resource('YearReport');
+    }).factory('updateService', function ($rootScope) {
         var updateService = { };
 
         updateService.broadcastItem = function () {
@@ -106,6 +109,11 @@ function YearDashboardController($scope, YearDashboard) {
     });
 }
 
+function ReportController($scope, Report) {
+    $scope.dashboard = Report.get();
+}
+
 ActivityControl.$inject = ['$scope', '$http', '$location', 'Activity', 'updateService'];
 MonthDashboardController.$inject = ['$scope', 'Dashboard'];
 YearDashboardController.$inject = ['$scope', 'YearDashboard'];
+ReportController.$inject = ['$scope', 'Report'];
