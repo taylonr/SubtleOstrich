@@ -1,0 +1,22 @@
+﻿@model SubtleOstrich.Logic.User
+
+@{
+    ViewBag.Title = "Report";
+}
+
+<h2>Report</h2>
+
+<input id="user" type="hidden" value="@Model.Id"/>
+<div id='calendar'></div>
+
+<script type="text/javascript">
+    (function ($) {
+        var id = $('#user').val();
+        var url = '/Activity/ReportEvents?id=' + id;
+        
+        $('#calendar').fullCalendar({
+            defaultView: 'year',
+            eventSources: [url]
+        });
+    })(jQuery);
+</script>

@@ -92,6 +92,22 @@ namespace SubtleOstrich.Web.Controllers
 
             return Json(activities, JsonRequestBehavior.AllowGet);
         }
+
+        
+        public ActionResult Report(string uid, string source)
+        {
+            return View("Report", new User(uid, source));
+        }
+
+        public JsonResult ReportEvents(string id, double start, double end)
+        {
+            var user = id.Split(':');
+            var u = new User(user[1], user[0]);
+            var year = DateTime.Now.Year;
+            var activities = u.GetCalendarEvents(new DateTime(year, 1, 1), new DateTime(year, 12, 31));
+
+            return Json(activities, JsonRequestBehavior.AllowGet);
+        }
     }
 
 }
