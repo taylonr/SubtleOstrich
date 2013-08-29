@@ -5,6 +5,8 @@
 }
 <script src="@Url.Content("~/Scripts/subtleOstrich/activity.js")"></script>
 
+<div id="chart"></div>
+
 <div ng-controller="ReportController">
 
     <h2>Total: ({{dashboard.Total}})</h2>
@@ -17,6 +19,48 @@
 
 <input id="user" type="hidden" value="@Model.Id"/>
 <div id='calendar'></div>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    (function($) {
+    
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1.0', { 'packages': ['corechart'] });
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+       
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Class Type');
+        data.addColumn('number', 'Occurrences');
+        var source = window.location.search.substring(1).split('&')[1].substring(7);
+        var uid = window.location.search.substring(1).split('&')[0].substring(4);
+        
+        $.ajax('/Activity/YearReport?source=' + source + '&uid=' + uid).done(function (events) {
+            for (var i = 0; i < events.Activities.length; i++) {
+                data.addRow([events.Activities[i].Name, events.Activities[i].Value]);
+            }
+            // Set chart options
+            var options = {
+                'width': 400,
+                'height': 300,
+                'backgroundColor': {fill: 'transparent'}
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart'));
+            chart.draw(data, options);
+        });
+    }
+    })(jQuery);
+
+</script>
 
 <script type="text/javascript">
     (function ($) {
