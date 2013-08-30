@@ -140,5 +140,15 @@ namespace SubtleOstrich.Logic
                 Title = year.ToString()
             };
         }
+
+        public Dashboard GetMonthReport(DateTime now)
+        {
+            return new Dashboard
+            {
+                Activities = Activities.OrderByDescending(act => act.GetMonthlyTotal(now.Month)).Select(x => new Status(x.Name, x.GetMonthlyTotal(now.Month))).ToList(),
+                Total = GetMonthTotal(now.Month),
+                Title = now.ToLongDateString()
+            };
+        }
     }
 }

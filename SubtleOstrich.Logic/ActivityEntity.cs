@@ -34,7 +34,7 @@ namespace SubtleOstrich.Logic
 
         public int GetMonthlyTotal(int month)
         {
-            return Records.Count(record => record.Date.Month == month);
+            return Records.Count(record => record.Date.Month == month && record.Date.Year == DateTime.Now.Year);
         }
 
         public int GetYearlyTotal(int year)

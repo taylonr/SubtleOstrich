@@ -5,20 +5,10 @@
 }
 <script src="@Url.Content("~/Scripts/subtleOstrich/activity.js")"></script>
 
-<div id="chart"></div>
-
-<div ng-controller="ReportController">
-
-    <h2>Total: ({{dashboard.Total}})</h2>
-    <div ng-repeat="d in dashboard.Activities" ng-show="dashboard.Activities.length">
-        <div class="span2" id="reportSummary">
-            <h5><span class="label label-info">{{d.Name}}</span>: <span> {{d.Value}}</span></h5>
-        </div>
-    </div>
-</div>
+<div id="year-chart" class="pull-left"></div>
+<div id="month-chart" class="pull-left"></div>
 
 <input id="user" type="hidden" value="@Model.Id"/>
-<div id='calendar'></div>
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
@@ -44,32 +34,47 @@
         
         $.ajax('/Activity/YearReport?source=' + source + '&uid=' + uid).done(function (events) {
             for (var i = 0; i < events.Activities.length; i++) {
-                data.addRow([events.Activities[i].Name, events.Activities[i].Value]);
+                data.addRow([events.Activities[i].Name + "(" + events.Activities[i].Value + ")", events.Activities[i].Value]);
             }
             // Set chart options
             var options = {
-                'width': 400,
-                'height': 300,
-                'backgroundColor': {fill: 'transparent'}
+                'title': 'BJJ Activities This Year',
+                'width': 800,
+                'height': 600,
+                'pieSliceText': 'label value',
+                'backgroundColor': { fill: 'transparent' },
+                'tooltip.text':'both'
             };
 
+
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('chart'));
+            var chart = new google.visualization.PieChart(document.getElementById('year-chart'));
             chart.draw(data, options);
+        });
+        
+        var monthData = new google.visualization.DataTable();
+        monthData.addColumn('string', 'Class Type');
+        monthData.addColumn('number', 'Occurrences');
+        $.ajax('/Activity/MonthReport?source=' + source + '&uid=' + uid).done(function (events) {
+            for (var i = 0; i < events.Activities.length; i++) {
+                monthData.addRow([events.Activities[i].Name + "(" + events.Activities[i].Value + ")", events.Activities[i].Value]);
+            }
+            // Set chart options
+            var options = {
+                'title': 'BJJ Activities This Month',
+                'width': 800,
+                'height': 600,
+                'pieSliceText': 'label value',
+                'backgroundColor': { fill: 'transparent' },
+                'tooltip.text': 'both'
+            };
+
+
+            // Instantiate and draw our chart, passing in some options.
+            var monthChart = new google.visualization.PieChart(document.getElementById('month-chart'));
+            monthChart.draw(monthData, options);
         });
     }
     })(jQuery);
 
-</script>
-
-<script type="text/javascript">
-    (function ($) {
-        var id = $('#user').val();
-        var url = '/Activity/ReportEvents?id=' + id;
-
-        $('#calendar').fullCalendar({
-            defaultView: 'year',
-            eventSources: [url]
-        });
-    })(jQuery);
 </script>

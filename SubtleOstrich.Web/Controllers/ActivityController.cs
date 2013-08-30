@@ -100,6 +100,14 @@ namespace SubtleOstrich.Web.Controllers
 
             return Json(activities, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult MonthReport(string source, string uid)
+        {
+            var u = new User(uid, source);
+            var activities = u.GetMonthReport(DateTime.Now);
+
+            return Json(activities, JsonRequestBehavior.AllowGet);
+        }
         
         public ActionResult Report(string uid, string source)
         {
