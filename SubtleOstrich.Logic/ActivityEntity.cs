@@ -12,6 +12,8 @@ namespace SubtleOstrich.Logic
 
         public string Name { get; set; }
 
+        public decimal Hours { get; set; }
+
         public IList<Record> Records { get; set; }
 
         public Activity()

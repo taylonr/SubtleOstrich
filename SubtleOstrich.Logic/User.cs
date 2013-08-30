@@ -87,7 +87,12 @@ namespace SubtleOstrich.Logic
 
             var occurrences = new List<Occurrence>();
             foreach(var a in activities)
-                occurrences.AddRange(a.Records.Where(x => x.Date.ToLocalTime().ToShortDateString() == date.ToShortDateString()).Select(r => new Occurrence(r.Id, a.Name, r.Date, r.Note)));
+            {
+                var time = a.Hours;
+
+                occurrences.AddRange(a.Records.Where(x => x.Date.ToLocalTime().ToShortDateString() == date.ToShortDateString()).Select(r => new Occurrence(r.Id, a.Name, r.Date, r.Note, r.Time ?? time)));
+            }
+                
 
             return occurrences;
         }

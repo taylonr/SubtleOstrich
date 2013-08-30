@@ -43,15 +43,27 @@ namespace SubtleOstrich.Web.Controllers
                 occ.Date = DateTime.Today;
 
             var u = new User(User.Uid, User.Source);
-            var text = occ.Name.Split(':');
+            var nameIndex = occ.Name.IndexOfAny(new[] {':', '!'});
+            var name = occ.Name.Substring(0, nameIndex);
 
-            occ.Name = text[0].Trim();
+            var text = occ.Name.Split(':');
+            var hours = occ.Name.Split('!');
+
+            occ.Name = name.Trim();
 
             if (text.Length == 2)
                 occ.Note = text[1].Trim();
 
-            occ.Id = u.AddRecord(occ.Name, new Record(occ.Date, occ.Note));
-            return Json(occ, JsonRequestBehavior.AllowGet);
+            
+            if (hours.Length == 2)
+            {
+                decimal time;
+                decimal.TryParse(hours[1], out time);
+                occ.Hours = time;
+            }
+
+            occ.Id = u.AddRecord(occ.Name, new Record(occ.Date, occ.Note, occ.Hours));
+            return Json(occ);
         }
 
         [HttpDelete]
