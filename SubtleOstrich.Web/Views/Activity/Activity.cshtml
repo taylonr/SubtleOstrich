@@ -39,7 +39,7 @@
         <li class="well" ng-repeat="act in activity">
             <form ng-submit="delete()">
                 <h2>{{act.Name}}</h2>
-                <h4 class="subtitle">{{act.Hours}} hours</h4>
+                <h4 class="subtitle" ng-hide="!act.Hours">{{act.Hours}} hours</h4>
                 {{act.Note}}
                     <span class="pull-right"><a href="#" ng-click="delete( act.Id )"><i class="icon-trash"></i></a></span>
             </form>

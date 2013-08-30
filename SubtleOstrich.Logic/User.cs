@@ -89,8 +89,10 @@ namespace SubtleOstrich.Logic
             foreach(var a in activities)
             {
                 var time = a.Hours;
-
-                occurrences.AddRange(a.Records.Where(x => x.Date.ToLocalTime().ToShortDateString() == date.ToShortDateString()).Select(r => new Occurrence(r.Id, a.Name, r.Date, r.Note, r.Time ?? time)));
+                if(time > 0)
+                    occurrences.AddRange(a.Records.Where(x => x.Date.ToLocalTime().ToShortDateString() == date.ToShortDateString()).Select(r => new Occurrence(r.Id, a.Name, r.Date, r.Note, r.Time ?? time)));
+                else
+                    occurrences.AddRange(a.Records.Where(x => x.Date.ToLocalTime().ToShortDateString() == date.ToShortDateString()).Select(r => new Occurrence(r.Id, a.Name, r.Date, r.Note, r.Time)));
             }
                 
 

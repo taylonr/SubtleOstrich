@@ -44,7 +44,7 @@ namespace SubtleOstrich.Web.Controllers
 
             var u = new User(User.Uid, User.Source);
             var nameIndex = occ.Name.IndexOfAny(new[] {':', '!'});
-            var name = occ.Name.Substring(0, nameIndex);
+            var name = nameIndex == -1 ? occ.Name : occ.Name.Substring(0, nameIndex);
 
             var text = occ.Name.Split(':');
             var hours = occ.Name.Split('!');
