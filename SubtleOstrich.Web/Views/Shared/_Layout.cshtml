@@ -52,7 +52,7 @@
                     <div class="aqua-well-mini pull-right">
                         <div class="aqua-user">
 
-                            <span class="aqua-user-name">@User.Identity.Name</span>
+                            <span class="aqua-user-name"><a href="@Url.Action("Index", "User")">@User.Identity.Name</a></span>
 
                             <div class="btn-group">
                                 <a href="@Url.Action("Logout", "Authentication")" class="btn btn-small" tabindex="-1">Logout</a>
