@@ -6,7 +6,7 @@ namespace SubtleOstrich.Logic
     {
         public IEnumerable<Status> Activities { get; set; }
 
-        public int Total { get; set; }
+        public decimal Total { get; set; }
 
         public string Title { get; set; }
     }

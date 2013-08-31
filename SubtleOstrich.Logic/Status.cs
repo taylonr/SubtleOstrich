@@ -4,9 +4,9 @@ namespace SubtleOstrich.Logic
     {
         public string Name { get; private set; }
 
-        public int Value { get; private set; }
+        public decimal Value { get; private set; }
 
-        public Status(string name, int value)
+        public Status(string name, decimal value)
         {
             Name = name;
             Value = value;

@@ -34,13 +34,41 @@ namespace SubtleOstrich.Logic
             Records.Add(record);
         }
 
-        public int GetMonthlyTotal(int month)
+        public decimal GetMonthlyTotal(int month)
         {
+            if(Hours > 0)
+            {
+                decimal total = 0;
+                foreach (var r in Records.Where(record => record.Date.Month == month && record.Date.Year == DateTime.Now.Year))
+                {
+                    if (r.Time.HasValue)
+                        total += r.Time.Value;
+                    else
+                        total += Hours;
+                }
+
+                return total;
+            }
+            
             return Records.Count(record => record.Date.Month == month && record.Date.Year == DateTime.Now.Year);
         }
 
-        public int GetYearlyTotal(int year)
+        public decimal GetYearlyTotal(int year)
         {
+            if(Hours > 0)
+            {
+                decimal total = 0;
+                foreach (var r in Records.Where(record => record.Date.Year == year))
+                {
+                    if (r.Time.HasValue)
+                        total += r.Time.Value;
+                    else
+                        total += Hours;
+                }
+
+                return total;
+            }
+
             return Records.Count(record => record.Date.Year == year);
         }
 

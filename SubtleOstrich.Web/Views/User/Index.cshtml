@@ -12,7 +12,10 @@
             <li class="well">
                 <h2>@Model.ElementAt(i).Name</h2>
                 <input type="hidden" name="[@i].Name" value="@Model.ElementAt(i).Name"/>
-                <input type="text" name="[@i].Hours" value="@Model.ElementAt(i).Hours"/>
+                <div class="input-append">
+                    <input type="text" name="[@i].Hours" value="@Model.ElementAt(i).Hours"/>
+                    <span class="add-on">Hours</span>
+                </div>
             </li>
 
         }

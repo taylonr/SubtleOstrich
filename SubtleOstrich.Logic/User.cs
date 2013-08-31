@@ -48,7 +48,7 @@ namespace SubtleOstrich.Logic
 
         public IList<Activity> Activities { get; set; }
 
-        public int GetMonthTotal(int month)
+        public decimal GetMonthTotal(int month)
         {
             return Activities.Sum(activity => activity.GetMonthlyTotal(month));
         }
@@ -69,7 +69,7 @@ namespace SubtleOstrich.Logic
             return record.Id;
         }
 
-        public int GetYearTotal(int year)
+        public decimal GetYearTotal(int year)
         {
             return Activities.Sum(activity => activity.GetYearlyTotal(year));
         }
