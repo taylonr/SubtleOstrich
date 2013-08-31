@@ -141,6 +141,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CouchPrincipal.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -543,6 +544,7 @@
     <Content Include="Views\Activity\Activity.Mobile.cshtml" />
     <Content Include="Views\Activity\Calendar.cshtml" />
     <Content Include="Views\Activity\Report.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

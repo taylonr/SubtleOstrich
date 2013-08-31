@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "User Activities";
+}
+
+<script src="@Url.Content("~/Scripts/subtleOstrich/activity.js")"></script>
+<div id="user" ng-controller="UserController">
+    <form ng-submit="save()">
+        <ul class="unstyled">
+            <li class="well" ng-repeat="act in activity">
+                <h2>{{act.Name}}</h2>
+                <input type="hidden" ng-model="Name"/>
+                <input type="text" ng-model="Hours" value="{{act.Hours}}"/>
+            </li>
+        </ul>
+    </form>
+
+</div>

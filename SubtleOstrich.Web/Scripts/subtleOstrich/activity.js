@@ -4,7 +4,8 @@
             when('/Activity/:date', { controller: ActivityControl, templateUrl: 'list' }).
             when('/Activity/MonthDashboard', { controller: MonthDashboardController }).
             when('/Activity/YearDashboard', { controller: YearDashboardController }).
-            when('/Activity/YearReport', {controller: ReportController}).
+            when('/Activity/YearReport', { controller: ReportController }).
+            when('/User/Activities', {controller: UserController}).
             otherwise({ redirectTo: '/Activity/' });
     }).factory('Activity', function($resource) {
         var Activity = $resource('Activity/ActivityList', { name: '@Name', date: '@Date', id: '@Id' });
@@ -21,6 +22,9 @@
         return $resource('Activity/YearDashboard');
     }).factory('Report', function ($resource) {
         return $resource('YearReport', { source: '@Source', uid: '@Uid' });
+    }).factory("user", function ($resource) {
+        var user = $resource('User/Activities');
+        return user;
     }).factory('updateService', function ($rootScope) {
         var updateService = { };
 
@@ -115,6 +119,37 @@ function ReportController($scope, $location, Report) {
     $scope.dashboard = Report.get({ uid: $scope.uid, source: $scope.source });
 }
 
+function UserController($scope, $http, $location, user) {
+
+    function getItems() {
+        $scope.activity = user.query();
+    }
+
+    getItems();
+
+    $scope.save = function () {
+        var u = new user();
+        u.$save(function(a, putResponseHeader) {
+            $scope.activity.push({ Name: a.Name, Id: a.Id, Note: a.Note, Time: a.Time });
+        });
+        $scope.name = '';
+    };
+
+    //$scope.delete = function (id) {
+
+    //    var act = new Activity({ Id: id });
+    //    act.$remove(function (a) {
+    //        for (var i = 0; i < $scope.activity.length; i++) {
+    //            if ($scope.activity[i].Id == id) {
+    //                $scope.activity.splice(i, 1);
+    //                updateService.broadcastItem();
+    //            }
+    //        }
+    //    });
+    //};
+}
+
+UserController.$inject = ['$scope', '$http', '$location', 'user'];
 ActivityControl.$inject = ['$scope', '$http', '$location', 'Activity', 'updateService'];
 MonthDashboardController.$inject = ['$scope', 'Dashboard'];
 YearDashboardController.$inject = ['$scope', 'YearDashboard'];
