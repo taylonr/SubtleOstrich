@@ -11,25 +11,28 @@ namespace SubtleOstrich.Web.Controllers
     {
         //
         // GET: /User/
-
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
-        }
-
-        [Authorize]
-        public JsonResult Activities()
-        {
             var u = new User(User.Uid, User.Source);
-            var activity = u.Activities.Select(a => new Occurrence{Name = a.Name, Hours = a.Hours});
-            return Json(activity, JsonRequestBehavior.AllowGet);
+            var activity = u.Activities.Select(a => new Occurrence { Name = a.Name, Hours = a.Hours });
+            return View(activity);
         }
 
+        
         [HttpPost]
         [Authorize]
-        public JsonResult Activities(IEnumerable<Occurrence> a)
+        public ActionResult Activities(IEnumerable<Occurrence> occurences)
         {
-            return Json(a);
+            var u = new User(User.Uid, User.Source);
+            foreach(var occ in occurences)
+            {
+                var activity = u.Activities.FirstOrDefault(a => a.Name == occ.Name);
+                activity.Hours = occ.Hours ?? 0;
+                u.Save();
+            }
+
+            return RedirectToAction("Index", "Activity");
         }
 
     }

@@ -1,17 +1,22 @@
-﻿@{
+﻿@model IEnumerable<Occurrence>
+@{
     ViewBag.Title = "User Activities";
 }
 
-<script src="@Url.Content("~/Scripts/subtleOstrich/activity.js")"></script>
-<div id="user" ng-controller="UserController">
-    <form ng-submit="save()">
-        <ul class="unstyled">
-            <li class="well" ng-repeat="act in activity">
-                <h2>{{act.Name}}</h2>
-                <input type="hidden" ng-model="Name"/>
-                <input type="text" ng-model="Hours" value="{{act.Hours}}"/>
-            </li>
-        </ul>
-    </form>
 
-</div>
+@using (Html.BeginForm("Activities", "User", FormMethod.Post))
+{
+    <ul class="unstyled">
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+            <li class="well">
+                <h2>@Model.ElementAt(i).Name</h2>
+                <input type="hidden" name="[@i].Name" value="@Model.ElementAt(i).Name"/>
+                <input type="text" name="[@i].Hours" value="@Model.ElementAt(i).Hours"/>
+            </li>
+
+        }
+    </ul>
+    
+    <button class="btn" type="submit">Save</button>
+}
