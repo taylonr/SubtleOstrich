@@ -58,7 +58,7 @@ namespace SubtleOstrich.Logic
             var activity = Activities.FirstOrDefault(act => act.Name.Equals(activityName, StringComparison.InvariantCultureIgnoreCase));
             if (activity == null)
             {
-                activity = new Activity(activityName);
+                activity = new Activity(activityName) {Hours = record.Time ?? 0};
                 Activities.Add(activity);
             }
 
