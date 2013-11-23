@@ -255,10 +255,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="connection.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AppSettings.config" />
     <Content Include="Content\bootstrap\less\wells.less" />
     <Content Include="Content\bootstrap\less\variables.less" />
     <Content Include="Content\bootstrap\less\utilities.less" />
@@ -311,11 +307,7 @@
     <Content Include="Content\fonts\modernpics-webfont.svg" />
     <Content Include="Content\fonts\modernpics-webfont.ttf" />
     <Content Include="Content\fonts\modernpics-webfont.woff" />
-    <Content Include="connectionProd.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\site.mobile.less" />
-    <Content Include="AppSettingsProd.config" />
     <None Include="Properties\PublishProfiles\Arvixe.pubxml" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
