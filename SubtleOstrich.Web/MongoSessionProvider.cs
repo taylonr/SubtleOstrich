@@ -319,7 +319,7 @@ namespace PVL
 
                 if (results != null)
                 {
-                    expires = results["Expires"].AsDateTime;
+                    expires = results["Expires"].ToUniversalTime();
 
                     if (expires < cTime)
                     {
@@ -333,7 +333,7 @@ namespace PVL
 
                     serializedItems = results["Items"].AsString;
                     lockId = results["LockId"].AsInt32;
-                    lockAge = cTime.Subtract(results["LockDate"].AsDateTime);
+                    lockAge = cTime.Subtract(results["LockDate"].ToUniversalTime());
                     actionFlags = (SessionStateActions)results["Flags"].AsInt32;
                     timeout = results["Timeout"].AsInt32;
                 }
