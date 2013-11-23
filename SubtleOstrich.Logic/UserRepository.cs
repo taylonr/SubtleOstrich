@@ -21,7 +21,7 @@ namespace SubtleOstrich.Logic
 
         public User GetBySourceAndId(string providerName, string id)
         {
-            return _mongo.GetSingle(u => u.Id == string.Format("{0}:{1}", providerName, id));
+            return _mongo.First(u => u.Id == string.Format("{0}:{1}", providerName, id));
         }
 
         public IEnumerable<Activity> GetActivities(string id, DateTime date)
@@ -35,7 +35,7 @@ namespace SubtleOstrich.Logic
 
         public IList<Activity> GetActivities(string id)
         {
-            return _mongo.GetSingle(u => u.Id == id).Activities ?? new List<Activity>();
+            return _mongo.First(u => u.Id == id).Activities ?? new List<Activity>();
         }
 
         public string GetName(string id)
