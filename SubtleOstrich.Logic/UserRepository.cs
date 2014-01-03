@@ -21,7 +21,7 @@ namespace SubtleOstrich.Logic
 
         public User GetBySourceAndId(string providerName, string id)
         {
-            return _mongo.First(u => u.Id == string.Format("{0}:{1}", providerName, id));
+            return _mongo.FirstOrDefault(u => u.Id == string.Format("{0}:{1}", providerName, id));
         }
 
         public IEnumerable<Activity> GetActivities(string id, DateTime date)
